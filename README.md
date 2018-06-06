@@ -1,2 +1,2 @@
 # Vue-Dev
-A repository for a Vue development project.
+A repository with the basic files for a Vue development project.
