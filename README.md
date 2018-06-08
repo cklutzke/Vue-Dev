@@ -7,9 +7,6 @@ TO RUN THIS APPLICATION:
 
 -------------------------------------------
 
-TODO: Figure out how to use .gitignore to exclude Bootstrap files from
-this repo.
-
 TODO: Bundle Bootstrap and single-file components using webpack instead of
 including them via script and link tags. See https://webpack.js.org/guides/getting-started/
 to learn webpack and https://bootstrap-vue.js.org/docs/reference/starter-templates/
