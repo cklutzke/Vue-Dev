@@ -1,6 +1,18 @@
 # Vue-Dev
-A repository with the basic files for a Vue development project.
+A repository with the basic files for a Bootstrap-Vue development project.
 
-Including files for using Bootstrap Vue.
+TO RUN THIS APPLICATION:
+1. Clone the repo.
+2. Load index.html into your browser.
 
-TODO: Display Hello World via a Bootstrap component.
+-------------------------------------------
+
+TODO: Figure out how to use .gitignore to exclude Bootstrap files from
+this repo.
+
+TODO: Bundle Bootstrap and single-file components using webpack instead of
+including them via script and link tags. See https://webpack.js.org/guides/getting-started/
+to learn webpack and https://bootstrap-vue.js.org/docs/reference/starter-templates/
+for examples of using it with bootstrap.
+  Prereqs to add to TO RUN instructions:
+  Install Node.js from << https://nodejs.org/en/ >> to get NPM.
