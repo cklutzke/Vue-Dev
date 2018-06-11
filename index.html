@@ -13,9 +13,11 @@
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.css"/>
 
   <!-- Required Bootstrap-Vue scripts -->
-  <script src="https://unpkg.com/vue"></script>
-  <!-- TODO: Before actual distribution, include these libraries via webpack rather than reference. -->
 
+  <!-- TODO: Before distribution, switch this reference from the dev version to the production version, for better performance. -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+  <!-- TODO: Before actual distribution, include these libraries via webpack rather than reference. -->
   <script src="https://unpkg.com/babel-polyfill@latest/dist/polyfill.min.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@latest/dist/bootstrap-vue.js"></script>
 
@@ -23,7 +25,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
 <body>
-  
+
   <div id="app">
     <b-container>
       <b-alert variant="success" show=true>
