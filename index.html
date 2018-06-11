@@ -30,28 +30,33 @@
     <div id="product">
       <h1>{{ product.name }}</h1>
       <b-container>
-        <b-img :src="product.image" :alt="product.alt" fluid />
+        <b-row>
+          <b-col>
+            <b-container>
+              <b-img :src="product.image" :alt="product.alt" fluid />
+            </b-container>
+            <p>{{ product.description }}</p>
+            <!-- TODO: What is with the errors and violations this video is causing? Happens in an iframe too. -->
+            <b-embed type="iframe"
+                     aspect="16by9"
+                     :src="product.video"
+                     allowfullscreen
+            ></b-embed>
+          </b-col>
+          <b-col>
+            <b-button-group>
+              <b-button variant="primary">
+                <!-- TODO: Insert the shopping cart glyphicon here. -->
+                Buy for ${{ product.unitPrice }}
+              </b-button>
+              <!-- TODO: Insert the gift glyphicon before and a down arrow after this button's text. -->
+              <b-dropdown text="Add to Wish List">
+                <b-dropdown-item>New wish list</b-dropdown-item>
+              </b-dropdown>
+            </b-button-group>
+          </b-col>
+        </b-row>
       </b-container>
-      <p>{{ product.description }}</p>
-      <!-- TODO: What is with the errors and violations this video is causing? Happens in an iframe too. -->
-      <b-embed type="iframe"
-               aspect="16by9"
-               :src="product.video"
-               allowfullscreen
-      ></b-embed>
-
-      <b-button-group>
-        <b-button variant="primary">
-          <!-- TODO: Insert the shopping cart glyphicon here. -->
-          Buy for ${{ product.unitPrice }}
-        </b-button>
-        <!-- TODO: Insert the gift glyphicon before and a down arrow after this button's text. -->
-        <b-dropdown text="Add to Wish List">
-          <b-dropdown-item>New wish list</b-dropdown-item>
-        </b-dropdown>
-      </b-button-group>
-
-
     </div>
   </div>
 
