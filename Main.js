@@ -12,7 +12,9 @@ window.app = new Vue({
       description: 'These painted wood figurines, available in a variety of colors, \
         make a great alternative to pawns for board games with character.  Each one \
         stands 3/4\" tall by 5/8\" at the base, in the shape of the human \
-        body with out-stretched arms.'
+        body with out-stretched arms.',
+      /* TODO: Create a price object here. */
+      unitPrice: 0.12
     }
   }
 })

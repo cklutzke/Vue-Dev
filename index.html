@@ -39,6 +39,19 @@
                :src="product.video"
                allowfullscreen
       ></b-embed>
+
+      <b-button-group>
+        <b-button variant="primary">
+          <!-- TODO: Insert the shopping cart glyphicon here. -->
+          Buy for ${{ product.unitPrice }}
+        </b-button>
+        <!-- TODO: Insert the gift glyphicon before and a down arrow after this button's text. -->
+        <b-dropdown text="Add to Wish List">
+          <b-dropdown-item>New wish list</b-dropdown-item>
+        </b-dropdown>
+      </b-button-group>
+
+
     </div>
   </div>
 
