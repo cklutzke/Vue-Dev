@@ -1,6 +1,9 @@
 
 /* TODO: Get data from the server. */
 
+const mmPerInch = 25.4;
+const gramsPerOunce = 28.35;
+
 // vitalsData represents product data from the server.
 const vitalsData = {
   quantityInStock: 5084,
@@ -15,17 +18,17 @@ const vitalsData = {
 
 // pricingData represents product price data from the server.
 const pricingData = [
-  "1:0.1171",
-  "10:0.0806",
-  "100:0.0644",
-  "1000:0.0384"
+  "1@0.1171",
+  "10@0.0806",
+  "100@0.0644",
+  "1000@0.0384"
 ]
 
 // prices is an array of bulk pricing tiers, stored as numbers for calculation.
 var prices = [];
 var lastMin = NaN;
 for (var i = pricingData.length - 1; i >= 0; i--) {
-	var priceData = pricingData[i].split(":");
+	var priceData = pricingData[i].split("@");
     var priceTier = {
     	min: Number(priceData[0]),
     	max: lastMin,
@@ -36,6 +39,7 @@ for (var i = pricingData.length - 1; i >= 0; i--) {
 }
 
 // priceTable is structured for the Bulk Pricing table display.
+// Maybe this could be done with Bootstrap custom data rendering instead? https://bootstrap-vue.js.org/docs/components/table#custom-data-rendering
 var priceTable = [];
 for (var i = 0; i < prices.length; i++) {
   var rangeEnd;
@@ -61,12 +65,13 @@ var productObj = {
       make a great alternative to pawns for board games with character.  Each one \
       stands 3/4\" tall by 5/8\" at the base, in the shape of the human \
       body with out-stretched arms.',
-    unitPrice: prices[0].price.toFixed(2),
+    unitPrice: "$" + prices[0].price.toFixed(2),
     priceTableItems: priceTable,
     priceTableFields: [
       {key: 'range', label: 'Bulk Pricing'},
       {key: 'ea', label: ''}
-    ]
+    ],
+    lastPriceChange: "2018-01-24"
 }
 
 window.app = new Vue({

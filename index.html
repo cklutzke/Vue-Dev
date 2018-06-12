@@ -47,12 +47,13 @@
             <b-button-group>
               <!-- TODO: Any product like this that can be purchased in bulk
               should probably have controls to select the quantity to
-              be ordered. -->
+              be ordered, which could in turn affect the subtotal price. -->
+              <!-- TODO: Make these buttons do something. -->
               <b-button variant="primary">
                 <!-- TODO: Insert the shopping cart glyphicon here. -->
-                Buy for ${{ product.unitPrice }}
+                Buy for {{ product.unitPrice }}
               </b-button>
-              <!-- TODO: Insert the gift glyphicon before and a down arrow after this button's text. -->
+              <!-- TODO: Insert the gift glyphicon before this button's text. -->
               <b-dropdown text="Add to Wish List">
                 <b-dropdown-item>New wish list</b-dropdown-item>
               </b-dropdown>
@@ -66,6 +67,9 @@
               <b-table :items="product.priceTableItems" :fields="product.priceTableFields">
               </b-table>
             </template>
+            <div>
+              <p>Last Price Change: {{ product.lastPriceChange }}</p>
+            </div>
           </b-col>
         </b-row>
       </b-container>
