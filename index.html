@@ -36,7 +36,7 @@
               <b-img :src="product.image" :alt="product.alt" fluid />
             </b-container>
             <p>{{ product.description }}</p>
-            <!-- TODO: What is with the errors and violations this video is causing? Happens in an iframe too. -->
+            <!-- TODO: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too. -->
             <b-embed type="iframe"
                      aspect="16by9"
                      :src="product.video"
@@ -45,6 +45,9 @@
           </b-col>
           <b-col>
             <b-button-group>
+              <!-- TODO: Any product like this that can be purchased in bulk
+              should probably have controls to select the quantity to
+              be ordered. -->
               <b-button variant="primary">
                 <!-- TODO: Insert the shopping cart glyphicon here. -->
                 Buy for ${{ product.unitPrice }}
@@ -54,6 +57,15 @@
                 <b-dropdown-item>New wish list</b-dropdown-item>
               </b-dropdown>
             </b-button-group>
+            <!-- TODO: Insert Vitals table here.
+              Show dimensions in both US and metric units.
+              Provide links to other parts of the same color, category, and material.
+              Provide dropdowns to select different colors, materials, and sizes.
+            -->
+            <template>
+              <b-table :items="product.priceTableItems" :fields="product.priceTableFields">
+              </b-table>
+            </template>
           </b-col>
         </b-row>
       </b-container>
