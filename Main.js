@@ -87,6 +87,8 @@ var productObj = {
     unitPrice: "$" + Number(productData.price).toFixed(2),
     vitalsTableItems: [
       {key: "Quantity in Stock", value1: productData.quantity, value2: ""},
+      // TODO: Add Color, Category, and Material. With links to other matching parts.
+      // TODO: Provide dropdowns to select different colors, materials, and sizes.
       {key: "Weight", value1: Number(productData.weight).toFixed(2) + " oz",
         value2: ouncesToGrams(productData.weight)},
       {key: "Height", value1: Number(productData.height).toFixed(2) + " in",
