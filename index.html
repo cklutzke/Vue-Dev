@@ -6,7 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-  <title>Working Title</title>
+  <!-- TODO: Set the favicon. -->
+  <!-- TODO: Upddate this based on the displayed product. -->
+  <title>BGC Proto 1</title>
 
   <!-- Required Bootstrap-Vue Stylesheets -->
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap/dist/css/bootstrap.min.css"/>
@@ -58,13 +60,22 @@
                 <b-dropdown-item>New wish list</b-dropdown-item>
               </b-dropdown>
             </b-button-group>
+            <div></div>
             <!-- TODO: Insert Vitals table here.
               Show dimensions in both US and metric units.
               Provide links to other parts of the same color, category, and material.
               Provide dropdowns to select different colors, materials, and sizes.
             -->
             <template>
-              <b-table :items="product.priceTableItems" :fields="product.priceTableFields">
+              <b-table
+                :items="product.vitalsTableItems"
+                :fields="product.vitalsTableFields">
+              </b-table>
+            </template>
+            <template>
+              <b-table
+                :items="product.priceTableItems"
+                :fields="product.priceTableFields">
               </b-table>
             </template>
             <div>

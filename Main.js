@@ -1,8 +1,4 @@
 
-// Computational constants.
-const mmPerInch = 25.4;
-const gramsPerOunce = 28.35;
-
 /* TODO: Get productData from the server. */
 // productData represents product data from the server.
 const productData = {
@@ -69,6 +65,18 @@ const productData = {
   "youtube_video_id" : "Hj6N59wZi1I"
 }
 
+function ouncesToGrams(ounces) {
+  // Returns a string in the format "#.## g".
+  // TODO: Throw an exception if ounces isNaN.
+  return (Number(ounces) * 28.35).toFixed(2) + " g";
+}
+
+function inchesToMm(inches) {
+  // Returns a string in the format "#.## mm".
+  // TODO: Throw an exception if inches isNaN.
+  return (Number(inches) * 25.4).toFixed(2) + " mm";
+}
+
 var productObj = {
     name: productData.name,
     image: "http:" + productData.preview_uri,
@@ -77,6 +85,22 @@ var productObj = {
     // Youtube URLs must be in this "/embed/" format - see https://stackoverflow.com/questions/9934944
     video: "https://www.youtube.com/embed/" + productData.youtube_video_id,
     unitPrice: "$" + Number(productData.price).toFixed(2),
+    vitalsTableItems: [
+      {key: "Quantity in Stock", value1: productData.quantity, value2: ""},
+      {key: "Weight", value1: Number(productData.weight).toFixed(2) + " oz",
+        value2: ouncesToGrams(productData.weight)},
+      {key: "Height", value1: Number(productData.height).toFixed(2) + " in",
+        value2: inchesToMm(productData.height)},
+      {key: "Width", value1: Number(productData.width).toFixed(2) + " in",
+        value2: inchesToMm(productData.width)},
+      {key: "Depth", value1: Number(productData.depth).toFixed(2) + " in",
+        value2: inchesToMm(productData.depth)}
+    ],
+    vitalsTableFields: [
+      {key: "key", label: "Vitals"},
+      {key: "value1", label: ""},
+      {key: "value2", label: ""}
+    ],
     priceTableItems: [
       {range: "1-9", ea: "$" + productData.price + " ea"},
       {range: "10-99", ea: "$" + productData.price_10 + " ea"},
