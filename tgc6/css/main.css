@@ -1,0 +1,897 @@
+html {
+ background-color: white;
+}
+body {
+ padding: 0;
+ background: 0;
+ color: black;
+}
+
+h1, h2, h3, h4 { font-weight: 300}
+
+.hidden {
+    display: none;
+}
+
+.preview-medium {
+  max-height: 100px;
+  max-width: 100px;
+  border: 1px solid #444;
+  background-color: white;
+}
+
+.preview-small {
+  border: 1px solid #444;
+  max-height: 35px;
+  border: 0;
+}
+
+/* background */
+
+.bg-primary {
+    background: #284B91 !important;
+}
+
+.bg-warning {
+    background: #e79c26 !important;
+    color: black;
+}
+
+.bg-danger {
+    background: #cf1f02 !important;
+}
+
+.bg-info {
+    background: #1A7E83 !important;
+}
+
+.bg-success {
+    background: #bbd329 !important;
+    color: black;
+}
+
+/* tables */
+.table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  background-color: transparent;
+}
+
+.table th,
+.table td {
+  border-top: 1px solid #eee;
+}
+
+.table thead th {
+  border-bottom: 2px solid #eee;
+}
+
+.table tbody + tbody {
+  border-top: 2px solid #eee;
+}
+
+.table .table {
+  background-color: white;
+}
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.table-hover :hover > td,
+.table-hover :hover > th {
+  background-color: #eee;
+}
+
+
+/* text */
+.text-success {
+    color: #bbd329 !important;
+}
+
+/* social media buttons */
+
+.social {
+    font-size: 150%;
+}
+
+.social .nav-link:hover {
+    background-color: white;
+}
+
+.social .facebook:hover {
+    color: #3b5998;
+}
+
+.social .twitter:hover {
+    color: #1dcaff;
+}
+
+.social .youtube:hover {
+    color: #ff0000;
+}
+
+.social .pintrest:hover {
+    color: #bd081c;
+}
+
+.social .tumblr:hover {
+    color: #35465c;
+}
+
+.social .gplus:hover {
+    color: #d34836;
+}
+
+.social .rss:hover {
+    color: orange;
+}
+
+.social .instagram:hover {
+    color: #bc2a8d;
+}
+
+
+/* Off Canvas */
+
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all .25s ease-out;
+         -o-transition: all .25s ease-out;
+            transition: all .25s ease-out;
+  }
+
+  .row-offcanvas-right {
+    right: 0;
+  }
+
+  .row-offcanvas-left {
+    left: 0;
+  }
+
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -50%; /* 6 columns */
+  }
+
+  .row-offcanvas-right.active {
+    right: 50%; /* 6 columns */
+  }
+
+  .row-offcanvas-left.active {
+    left: 50%; /* 6 columns */
+  }
+
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 50%; /* 6 columns */
+  }
+}
+
+/* search */
+
+.text-blur {
+    color: transparent;
+   text-shadow: 0 0 5px white;
+}
+
+aside .facet-wrapper .ais-refinement-list--item a, aside .facet-wrapper .nav.flex-column a {
+    color: #000;
+}
+
+aside .facet-wrapper .ais-refinement-list--item__active a {
+    color: #ffffff;
+}
+
+aside .ais-price-ranges--item.ais-price-ranges--item__active.active a div {
+    display: none;
+}
+aside .ais-price-ranges--item.ais-price-ranges--item__active.active a:after {
+    content:"< Any Price";
+}
+aside .facet-category-title {
+    font-size: 90%;
+    margin: 0;
+    padding: 0;
+}
+aside .facet-wrapper {
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+    font-size: .87em;
+    border-right: 1px solid #ccc;
+    padding-right: 12px;
+    background-color: white;
+}
+aside .facet {
+    margin-bottom: 16px;
+}
+aside .facet-title {
+    font-weight: bold;
+    margin: 4px 0;
+}
+aside .facet-item, aside a {
+}
+aside .facet-item:hover, aside a:hover {
+    text-decoration: none;
+}
+aside .facet-item.active, aside a.active {
+      font-weight: bold;
+}
+aside .facet-item input, aside a input {
+      margin-right: 4px;
+}
+aside .facet-name {
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+}
+aside .facet-count {
+    margin-left: 4px;
+}
+aside #color:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+aside .facet-color {
+    width: 28px;
+    height: 28px;
+    border-radius: 3px;
+    margin: 0 6px 6px;
+    display: block;
+    overflow: hidden;
+    float: left;
+    border: 1px solid #333;
+}
+aside .facet-color.checked {
+      box-shadow: inset 0 0 0 4px rgba(255, 255, 255, 0.5);
+}
+aside .facet-color[data-facet-value="White"] {
+      background-color: #FFFFFF;
+      box-shadow: inset 0 0 0 1px #CCC;
+}
+aside .facet-color[data-facet-value="White"].checked {
+        box-shadow: inset 0 0 0 4px rgba(0, 0, 0, 0.1);
+}
+aside .facet-color[data-facet-value="Black"] {
+      background-color: #000000;
+}
+aside .facet-color[data-facet-value="Blue"] {
+      background-color: #1421ad;
+}
+aside .facet-color[data-facet-value="Clear"] {
+      background: rgba(255,255,255, 0.5);
+      background: -moz-linear-gradient(top, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.15) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(top, rgba(255,255,255,0.85) 0%,rgba(255,255,255,0.15) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(to bottom, rgba(255,255,255,0.85) 0%,rgba(255,255,255,0.15) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#bfffffff', endColorstr='#40ffffff',GradientType=0 ); /* IE6-9 */
+}
+aside .facet-color[data-facet-value="Silver"] {
+    background: rgb(171,171,171); /* Old browsers */
+background: -moz-linear-gradient(-45deg, rgba(171,171,171,1) 0%, rgba(255,255,255,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(171,171,171,1) 0%,rgba(255,255,255,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(171,171,171,1) 0%,rgba(255,255,255,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ababab', endColorstr='#ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+aside .facet-color[data-facet-value="Gold"] {
+background: rgb(132,99,0); /* Old browsers */
+background: -moz-linear-gradient(-45deg, rgba(255,238,153,1) 0%, rgba(132,99,0,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(255,238,153,1) 0%,rgba(132,99,0,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(255,238,153,1) 0%,rgba(132,99,0,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffee99', endColorstr='#846300',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+aside .facet-color[data-facet-value="Copper"] {
+background: rgb(252,175,151); /* Old browsers */
+background: -moz-linear-gradient(-45deg, rgba(252,175,151,1) 0%, rgba(196,99,1,1) 100%); /* FF3.6-15 */
+background: -webkit-linear-gradient(-45deg, rgba(252,175,151,1) 0%,rgba(196,99,1,1) 100%); /* Chrome10-25,Safari5.1-6 */
+background: linear-gradient(135deg, rgba(252,175,151,1) 0%,rgba(196,99,1,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcaf97', endColorstr='#c46301',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+}
+aside .facet-color[data-facet-value="Tan"] {
+      background-color: #e2d6a1;
+}
+aside .facet-color[data-facet-value="Brown"] {
+      background-color: #593603;
+}
+aside .facet-color[data-facet-value="Green"] {
+      background-color: #107c34;
+}
+aside .facet-color[data-facet-value="Grey"] {
+      background-color: #6F6E6C;
+}
+aside .facet-color[data-facet-value="Orange"] {
+      background-color: #d87f02;
+}
+aside .facet-color[data-facet-value="Pictured"] {
+    background: #ff3232; /* Old browsers */
+    background: -moz-linear-gradient(top, #ff3232 0%, #fbff30 25%, #28ff37 50%, #2893ff 77%, #ff89ef 100%); /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, #ff3232 0%,#fbff30 25%,#28ff37 50%,#2893ff 77%,#ff89ef 100%); /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, #ff3232 0%,#fbff30 25%,#28ff37 50%,#2893ff 77%,#ff89ef 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3232', endColorstr='#ff89ef',GradientType=0 ); /* IE6-9 */
+}
+aside .facet-color[data-facet-value="Pink"] {
+      background-color: #eb84ed;
+}
+aside .facet-color[data-facet-value="Purple"] {
+      background-color: #661191;
+}
+aside .facet-color[data-facet-value="Red"] {
+      background-color: #960a0a;
+}
+aside .facet-color[data-facet-value="white"] {
+      background-color: #fff;
+}
+aside .facet-color[data-facet-value="Yellow"] {
+      background-color: #ffec63;
+}
+aside .ais-price-ranges--form {
+    margin-top: 8px;
+}
+aside .ais-price-ranges--currency {
+    display: inline-block;
+    margin-right: 4px;
+}
+aside .ais-price-ranges--input {
+    display: inline-block;
+    width: 50px;
+}
+
+#clear-all {
+  display: block;
+  margin-bottom: 16px;
+}
+
+#clear-all .btn {
+    font-size: 13px;
+}
+
+
+.ribbon, .ribbon-primary, .ribbon-warning, .ribbon-danger, .ribbon-info,
+.ribbon-success {
+    padding: 5px 15px;
+    color: #fff;
+    font-weight: 400;
+    text-align: center;
+    display: inline-block;
+    position: relative;
+    border: 1px solid #222;
+}
+
+.ribbon::before, .ribbon-primary::before, .ribbon-warning::before,
+.ribbon-danger::before, .ribbon-info::before, .ribbon-success::before {
+    content: '';
+    border-left: 9px solid transparent;
+    border-right: 0 solid transparent;
+    position: absolute;
+    bottom: -14px;
+    left: 0
+}
+
+.ribbon-primary {
+    background: #284B91;
+}
+
+.ribbon-primary::before {
+    border-top: 14px solid #55325f
+}
+
+.ribbon-warning {
+    background: #e79c26;
+    color: black;
+}
+
+.ribbon-warning::before {
+    border-top: 14px solid #a07800
+}
+
+.ribbon-danger {
+    background: #cf1f02;
+}
+
+.ribbon-danger::before {
+    border-top: 14px solid #921925
+}
+
+.ribbon-info {
+    background: #1A7E83;
+}
+
+.ribbon-info::before {
+    border-top: 14px solid #0c525d
+}
+
+.ribbon-success {
+    background: #bbd329;
+    color: black;
+}
+
+.ribbon-success::before {
+    border-top: 14px solid #145523
+}
+
+.product {
+    margin-bottom: 40px;
+}
+
+.product.is-gray .image {
+    background: rgba(245, 245, 245, 0.5);
+    border: 1px solid #f0f0f0;
+}
+
+.product .image {
+    position: relative;
+    padding: 20px;
+    height: 230px
+}
+
+.product .image .ribbon, .product .image .ribbon-primary, .product .image .ribbon-warning,
+.product .image .ribbon-danger, .product .image .ribbon-info, .product .image .ribbon-success {
+    position: absolute;
+    top: 10px;
+    left: -10px;
+    z-index: 999;
+    font-size: 0.9em
+}
+
+.product .image .ribbon + .ribbon, .product .image .ribbon-primary + .ribbon,
+.product .image .ribbon-warning + .ribbon, .product .image .ribbon-danger + .ribbon,
+.product .image .ribbon-info + .ribbon, .product .image .ribbon-success + .ribbon,
+.product .image .ribbon + .ribbon-primary, .product .image .ribbon-primary + .ribbon-primary,
+.product .image .ribbon-warning + .ribbon-primary, .product .image .ribbon-danger + .ribbon-primary,
+.product .image .ribbon-info + .ribbon-primary, .product .image .ribbon-success + .ribbon-primary,
+.product .image .ribbon + .ribbon-warning, .product .image .ribbon-primary + .ribbon-warning,
+.product .image .ribbon-warning + .ribbon-warning, .product .image .ribbon-danger + .ribbon-warning,
+.product .image .ribbon-info + .ribbon-warning, .product .image .ribbon-success + .ribbon-warning,
+.product .image .ribbon + .ribbon-danger, .product .image .ribbon-primary + .ribbon-danger,
+.product .image .ribbon-warning + .ribbon-danger, .product .image .ribbon-danger + .ribbon-danger,
+.product .image .ribbon-info + .ribbon-danger, .product .image .ribbon-success + .ribbon-danger,
+.product .image .ribbon + .ribbon-info, .product .image .ribbon-primary + .ribbon-info,
+.product .image .ribbon-warning + .ribbon-info, .product .image .ribbon-danger + .ribbon-info,
+.product .image .ribbon-info + .ribbon-info, .product .image .ribbon-success + .ribbon-info,
+.product .image .ribbon + .ribbon-success, .product .image .ribbon-primary + .ribbon-success,
+.product .image .ribbon-warning + .ribbon-success, .product .image .ribbon-danger + .ribbon-success,
+.product .image .ribbon-info + .ribbon-success, .product .image .ribbon-success + .ribbon-success {
+    top: 60px
+}
+
+.product .image .ribbon + .ribbon + .ribbon, .product .image .ribbon-primary + .ribbon + .ribbon,
+.product .image .ribbon-warning + .ribbon + .ribbon, .product .image .ribbon-danger + .ribbon + .ribbon,
+.product .image .ribbon-info + .ribbon + .ribbon, .product .image .ribbon-success + .ribbon + .ribbon,
+.product .image .ribbon + .ribbon-primary + .ribbon, .product .image .ribbon-primary + .ribbon-primary + .ribbon,
+.product .image .ribbon-warning + .ribbon-primary + .ribbon, .product .image .ribbon-danger + .ribbon-primary + .ribbon,
+.product .image .ribbon-info + .ribbon-primary + .ribbon, .product .image .ribbon-success + .ribbon-primary + .ribbon,
+.product .image .ribbon + .ribbon-warning + .ribbon, .product .image .ribbon-primary + .ribbon-warning + .ribbon,
+.product .image .ribbon-warning + .ribbon-warning + .ribbon, .product .image .ribbon-danger + .ribbon-warning + .ribbon,
+.product .image .ribbon-info + .ribbon-warning + .ribbon, .product .image .ribbon-success + .ribbon-warning + .ribbon,
+.product .image .ribbon + .ribbon-danger + .ribbon, .product .image .ribbon-primary + .ribbon-danger + .ribbon,
+.product .image .ribbon-warning + .ribbon-danger + .ribbon, .product .image .ribbon-danger + .ribbon-danger + .ribbon,
+.product .image .ribbon-info + .ribbon-danger + .ribbon, .product .image .ribbon-success + .ribbon-danger + .ribbon,
+.product .image .ribbon + .ribbon-info + .ribbon, .product .image .ribbon-primary + .ribbon-info + .ribbon,
+.product .image .ribbon-warning + .ribbon-info + .ribbon, .product .image .ribbon-danger + .ribbon-info + .ribbon,
+.product .image .ribbon-info + .ribbon-info + .ribbon, .product .image .ribbon-success + .ribbon-info + .ribbon,
+.product .image .ribbon + .ribbon-success + .ribbon, .product .image .ribbon-primary + .ribbon-success + .ribbon,
+.product .image .ribbon-warning + .ribbon-success + .ribbon, .product .image .ribbon-danger + .ribbon-success + .ribbon,
+.product .image .ribbon-info + .ribbon-success + .ribbon, .product .image .ribbon-success + .ribbon-success + .ribbon,
+.product .image .ribbon + .ribbon + .ribbon-primary, .product .image .ribbon-primary + .ribbon + .ribbon-primary,
+.product .image .ribbon-warning + .ribbon + .ribbon-primary, .product .image .ribbon-danger + .ribbon + .ribbon-primary,
+.product .image .ribbon-info + .ribbon + .ribbon-primary, .product .image .ribbon-success + .ribbon + .ribbon-primary,
+.product .image .ribbon + .ribbon-primary + .ribbon-primary, .product .image .ribbon-primary + .ribbon-primary + .ribbon-primary,
+.product .image .ribbon-warning + .ribbon-primary + .ribbon-primary,
+.product .image .ribbon-danger + .ribbon-primary + .ribbon-primary,
+.product .image .ribbon-info + .ribbon-primary + .ribbon-primary, .product .image .ribbon-success + .ribbon-primary + .ribbon-primary,
+.product .image .ribbon + .ribbon-warning + .ribbon-primary, .product .image .ribbon-primary + .ribbon-warning + .ribbon-primary,
+.product .image .ribbon-warning + .ribbon-warning + .ribbon-primary,
+.product .image .ribbon-danger + .ribbon-warning + .ribbon-primary,
+.product .image .ribbon-info + .ribbon-warning + .ribbon-primary, .product .image .ribbon-success + .ribbon-warning + .ribbon-primary,
+.product .image .ribbon + .ribbon-danger + .ribbon-primary, .product .image .ribbon-primary + .ribbon-danger + .ribbon-primary,
+.product .image .ribbon-warning + .ribbon-danger + .ribbon-primary,
+.product .image .ribbon-danger + .ribbon-danger + .ribbon-primary, .product .image .ribbon-info + .ribbon-danger + .ribbon-primary,
+.product .image .ribbon-success + .ribbon-danger + .ribbon-primary,
+.product .image .ribbon + .ribbon-info + .ribbon-primary, .product .image .ribbon-primary + .ribbon-info + .ribbon-primary,
+.product .image .ribbon-warning + .ribbon-info + .ribbon-primary, .product .image .ribbon-danger + .ribbon-info + .ribbon-primary,
+.product .image .ribbon-info + .ribbon-info + .ribbon-primary, .product .image .ribbon-success + .ribbon-info + .ribbon-primary,
+.product .image .ribbon + .ribbon-success + .ribbon-primary, .product .image .ribbon-primary + .ribbon-success + .ribbon-primary,
+.product .image .ribbon-warning + .ribbon-success + .ribbon-primary,
+.product .image .ribbon-danger + .ribbon-success + .ribbon-primary,
+.product .image .ribbon-info + .ribbon-success + .ribbon-primary, .product .image .ribbon-success + .ribbon-success + .ribbon-primary,
+.product .image .ribbon + .ribbon + .ribbon-warning, .product .image .ribbon-primary + .ribbon + .ribbon-warning,
+.product .image .ribbon-warning + .ribbon + .ribbon-warning, .product .image .ribbon-danger + .ribbon + .ribbon-warning,
+.product .image .ribbon-info + .ribbon + .ribbon-warning, .product .image .ribbon-success + .ribbon + .ribbon-warning,
+.product .image .ribbon + .ribbon-primary + .ribbon-warning, .product .image .ribbon-primary + .ribbon-primary + .ribbon-warning,
+.product .image .ribbon-warning + .ribbon-primary + .ribbon-warning,
+.product .image .ribbon-danger + .ribbon-primary + .ribbon-warning,
+.product .image .ribbon-info + .ribbon-primary + .ribbon-warning, .product .image .ribbon-success + .ribbon-primary + .ribbon-warning,
+.product .image .ribbon + .ribbon-warning + .ribbon-warning, .product .image .ribbon-primary + .ribbon-warning + .ribbon-warning,
+.product .image .ribbon-warning + .ribbon-warning + .ribbon-warning,
+.product .image .ribbon-danger + .ribbon-warning + .ribbon-warning,
+.product .image .ribbon-info + .ribbon-warning + .ribbon-warning, .product .image .ribbon-success + .ribbon-warning + .ribbon-warning,
+.product .image .ribbon + .ribbon-danger + .ribbon-warning, .product .image .ribbon-primary + .ribbon-danger + .ribbon-warning,
+.product .image .ribbon-warning + .ribbon-danger + .ribbon-warning,
+.product .image .ribbon-danger + .ribbon-danger + .ribbon-warning, .product .image .ribbon-info + .ribbon-danger + .ribbon-warning,
+.product .image .ribbon-success + .ribbon-danger + .ribbon-warning,
+.product .image .ribbon + .ribbon-info + .ribbon-warning, .product .image .ribbon-primary + .ribbon-info + .ribbon-warning,
+.product .image .ribbon-warning + .ribbon-info + .ribbon-warning, .product .image .ribbon-danger + .ribbon-info + .ribbon-warning,
+.product .image .ribbon-info + .ribbon-info + .ribbon-warning, .product .image .ribbon-success + .ribbon-info + .ribbon-warning,
+.product .image .ribbon + .ribbon-success + .ribbon-warning, .product .image .ribbon-primary + .ribbon-success + .ribbon-warning,
+.product .image .ribbon-warning + .ribbon-success + .ribbon-warning,
+.product .image .ribbon-danger + .ribbon-success + .ribbon-warning,
+.product .image .ribbon-info + .ribbon-success + .ribbon-warning, .product .image .ribbon-success + .ribbon-success + .ribbon-warning,
+.product .image .ribbon + .ribbon + .ribbon-danger, .product .image .ribbon-primary + .ribbon + .ribbon-danger,
+.product .image .ribbon-warning + .ribbon + .ribbon-danger, .product .image .ribbon-danger + .ribbon + .ribbon-danger,
+.product .image .ribbon-info + .ribbon + .ribbon-danger, .product .image .ribbon-success + .ribbon + .ribbon-danger,
+.product .image .ribbon + .ribbon-primary + .ribbon-danger, .product .image .ribbon-primary + .ribbon-primary + .ribbon-danger,
+.product .image .ribbon-warning + .ribbon-primary + .ribbon-danger,
+.product .image .ribbon-danger + .ribbon-primary + .ribbon-danger, .product .image .ribbon-info + .ribbon-primary + .ribbon-danger,
+.product .image .ribbon-success + .ribbon-primary + .ribbon-danger,
+.product .image .ribbon + .ribbon-warning + .ribbon-danger, .product .image .ribbon-primary + .ribbon-warning + .ribbon-danger,
+.product .image .ribbon-warning + .ribbon-warning + .ribbon-danger,
+.product .image .ribbon-danger + .ribbon-warning + .ribbon-danger, .product .image .ribbon-info + .ribbon-warning + .ribbon-danger,
+.product .image .ribbon-success + .ribbon-warning + .ribbon-danger,
+.product .image .ribbon + .ribbon-danger + .ribbon-danger, .product .image .ribbon-primary + .ribbon-danger + .ribbon-danger,
+.product .image .ribbon-warning + .ribbon-danger + .ribbon-danger, .product .image .ribbon-danger + .ribbon-danger + .ribbon-danger,
+.product .image .ribbon-info + .ribbon-danger + .ribbon-danger, .product .image .ribbon-success + .ribbon-danger + .ribbon-danger,
+.product .image .ribbon + .ribbon-info + .ribbon-danger, .product .image .ribbon-primary + .ribbon-info + .ribbon-danger,
+.product .image .ribbon-warning + .ribbon-info + .ribbon-danger, .product .image .ribbon-danger + .ribbon-info + .ribbon-danger,
+.product .image .ribbon-info + .ribbon-info + .ribbon-danger, .product .image .ribbon-success + .ribbon-info + .ribbon-danger,
+.product .image .ribbon + .ribbon-success + .ribbon-danger, .product .image .ribbon-primary + .ribbon-success + .ribbon-danger,
+.product .image .ribbon-warning + .ribbon-success + .ribbon-danger,
+.product .image .ribbon-danger + .ribbon-success + .ribbon-danger, .product .image .ribbon-info + .ribbon-success + .ribbon-danger,
+.product .image .ribbon-success + .ribbon-success + .ribbon-danger,
+.product .image .ribbon + .ribbon + .ribbon-info, .product .image .ribbon-primary + .ribbon + .ribbon-info,
+.product .image .ribbon-warning + .ribbon + .ribbon-info, .product .image .ribbon-danger + .ribbon + .ribbon-info,
+.product .image .ribbon-info + .ribbon + .ribbon-info, .product .image .ribbon-success + .ribbon + .ribbon-info,
+.product .image .ribbon + .ribbon-primary + .ribbon-info, .product .image .ribbon-primary + .ribbon-primary + .ribbon-info,
+.product .image .ribbon-warning + .ribbon-primary + .ribbon-info, .product .image .ribbon-danger + .ribbon-primary + .ribbon-info,
+.product .image .ribbon-info + .ribbon-primary + .ribbon-info, .product .image .ribbon-success + .ribbon-primary + .ribbon-info,
+.product .image .ribbon + .ribbon-warning + .ribbon-info, .product .image .ribbon-primary + .ribbon-warning + .ribbon-info,
+.product .image .ribbon-warning + .ribbon-warning + .ribbon-info, .product .image .ribbon-danger + .ribbon-warning + .ribbon-info,
+.product .image .ribbon-info + .ribbon-warning + .ribbon-info, .product .image .ribbon-success + .ribbon-warning + .ribbon-info,
+.product .image .ribbon + .ribbon-danger + .ribbon-info, .product .image .ribbon-primary + .ribbon-danger + .ribbon-info,
+.product .image .ribbon-warning + .ribbon-danger + .ribbon-info, .product .image .ribbon-danger + .ribbon-danger + .ribbon-info,
+.product .image .ribbon-info + .ribbon-danger + .ribbon-info, .product .image .ribbon-success + .ribbon-danger + .ribbon-info,
+.product .image .ribbon + .ribbon-info + .ribbon-info, .product .image .ribbon-primary + .ribbon-info + .ribbon-info,
+.product .image .ribbon-warning + .ribbon-info + .ribbon-info, .product .image .ribbon-danger + .ribbon-info + .ribbon-info,
+.product .image .ribbon-info + .ribbon-info + .ribbon-info, .product .image .ribbon-success + .ribbon-info + .ribbon-info,
+.product .image .ribbon + .ribbon-success + .ribbon-info, .product .image .ribbon-primary + .ribbon-success + .ribbon-info,
+.product .image .ribbon-warning + .ribbon-success + .ribbon-info, .product .image .ribbon-danger + .ribbon-success + .ribbon-info,
+.product .image .ribbon-info + .ribbon-success + .ribbon-info, .product .image .ribbon-success + .ribbon-success + .ribbon-info,
+.product .image .ribbon + .ribbon + .ribbon-success, .product .image .ribbon-primary + .ribbon + .ribbon-success,
+.product .image .ribbon-warning + .ribbon + .ribbon-success, .product .image .ribbon-danger + .ribbon + .ribbon-success,
+.product .image .ribbon-info + .ribbon + .ribbon-success, .product .image .ribbon-success + .ribbon + .ribbon-success,
+.product .image .ribbon + .ribbon-primary + .ribbon-success, .product .image .ribbon-primary + .ribbon-primary + .ribbon-success,
+.product .image .ribbon-warning + .ribbon-primary + .ribbon-success,
+.product .image .ribbon-danger + .ribbon-primary + .ribbon-success,
+.product .image .ribbon-info + .ribbon-primary + .ribbon-success, .product .image .ribbon-success + .ribbon-primary + .ribbon-success,
+.product .image .ribbon + .ribbon-warning + .ribbon-success, .product .image .ribbon-primary + .ribbon-warning + .ribbon-success,
+.product .image .ribbon-warning + .ribbon-warning + .ribbon-success,
+.product .image .ribbon-danger + .ribbon-warning + .ribbon-success,
+.product .image .ribbon-info + .ribbon-warning + .ribbon-success, .product .image .ribbon-success + .ribbon-warning + .ribbon-success,
+.product .image .ribbon + .ribbon-danger + .ribbon-success, .product .image .ribbon-primary + .ribbon-danger + .ribbon-success,
+.product .image .ribbon-warning + .ribbon-danger + .ribbon-success,
+.product .image .ribbon-danger + .ribbon-danger + .ribbon-success, .product .image .ribbon-info + .ribbon-danger + .ribbon-success,
+.product .image .ribbon-success + .ribbon-danger + .ribbon-success,
+.product .image .ribbon + .ribbon-info + .ribbon-success, .product .image .ribbon-primary + .ribbon-info + .ribbon-success,
+.product .image .ribbon-warning + .ribbon-info + .ribbon-success, .product .image .ribbon-danger + .ribbon-info + .ribbon-success,
+.product .image .ribbon-info + .ribbon-info + .ribbon-success, .product .image .ribbon-success + .ribbon-info + .ribbon-success,
+.product .image .ribbon + .ribbon-success + .ribbon-success, .product .image .ribbon-primary + .ribbon-success + .ribbon-success,
+.product .image .ribbon-warning + .ribbon-success + .ribbon-success,
+.product .image .ribbon-danger + .ribbon-success + .ribbon-success,
+.product .image .ribbon-info + .ribbon-success + .ribbon-success, .product .image .ribbon-success + .ribbon-success + .ribbon-success {
+    top: 110px
+}
+
+.product .image img {
+    max-height: 210px;
+}
+
+.product .image:hover {
+    background: rgba(230, 230, 230, 0.5);
+}
+
+.product .title {
+    padding-top: 5px;
+}
+
+.product .title small a {
+    color: #777
+}
+
+.product .title a {
+    display: block;
+    color: #333;
+    text-decoration: none
+}
+
+.product .title a.btn {
+    color: white;
+}
+
+
+/* footer */
+
+.footbelt {
+    background-color: #222;
+    color: white;
+    background-image: url('/tgc6/img/bkg.png');
+    background-repeat: repeat;
+}
+.footbelt:hover {
+    background-color: #333;
+    color: white;
+}
+
+.footer {
+  background-color: #444;
+  color: white;
+  background-image: url('/tgc6/img/bkg.png');
+  background-repeat: repeat;
+}
+
+.footer a {
+  color: #bbd329;
+}
+
+.footcuff, .footcuff a {
+    background-color: #ccc;
+    color: black;
+    background-image: url('/tgc6/img/bkg.png');
+    background-repeat: repeat;
+}
+
+/* support button */
+
+.support {
+  color: black;
+  font-weight: 900;
+  background-color: #b7d432;
+  position: fixed;
+  top: 40%;
+  right: -25px;
+  border: 0;
+  font-size: 110%;
+  -ms-transform: rotate(90deg); /* IE 9 */
+  -webkit-transform: rotate(90deg); /* Chrome, Safari, Opera */
+  transform: rotate(90deg);
+}
+
+@media (min-width: 1000px) {
+    .support {
+        right: -35px;
+        font-size: 150%;
+    }
+}
+
+/* flynav */
+
+@media (min-width: 700px) {
+    .flynav {
+        position: fixed;
+        top: 121px;
+        left: 200px;
+        margin: 0px;
+        padding: 5px;
+        width: 510px;
+        height: 410px;
+        z-index: 9000;
+        background-color: rgba(0,0,0,0.7);
+    }
+    .flynav .flynavcontent {
+        margin: 0;
+        padding: 5px;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        width: 500px;
+        height: 400px;
+    }
+}
+
+.flynav .list-group-item {
+    background: rgba(255,255,255, 0.9)
+}
+
+.flynav .list-group-item:hover {
+    background: rgba(255,255,255, 1)
+}
+
+.flynav a.department-image-credit {
+    pointer-events: auto;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+
+/* sitenav */
+
+#sitenav {
+    background-color: #222;
+}
+
+#sitenav .sitenavbkg {
+    background-image: url('/tgc6/img/bkg.png');
+    background-repeat: repeat;
+}
+
+@media (min-width: 576px) {
+    #sitenav .dropdown-item {
+        font-size: 90%;
+        line-height: 115%;
+    }
+}
+
+#sitenav .mr-auto .nav-link {
+    text-transform: uppercase;
+}
+
+#sitenav .nav-link:hover {
+    background-color: #bbd329;
+    color: black;
+}
+
+#navad:hover {
+    background-color: #444;
+}
+
+@keyframes cartcountpulse {
+    from {background-color: white;}
+    to {background-color: #bbd329;}
+}
+
+#sitenav .cartcount.pulse {
+    animation-name: cartcountpulse;
+    animation-duration: 1s;
+    animation-iteration-count: 4;
+}
+
+@keyframes cartcountbulge {
+    from {font-size: 150%;}
+    to {font-size: 100%;}
+}
+
+#sitenav .cartcount.bulge {
+    animation-name: cartcountbulge;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+}
+
+/* background */
+
+.bg-dark {
+    background-color: #151515 !important;
+}
+
+/* navbar */
+
+.navbar-dark .navbar-nav .nav-link, .navbar-dark .navcart {
+    color: rgba(255, 255, 255, 0.8);
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+    color: white;
+}
+
+.navbarcartfixed {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 100000;
+    color: black !important;
+}
+
+.w-sm-50-100 {
+  width: 50% !important;
+}
+
+@media (min-width: 576px) {
+    .w-sm-50-100 {
+      width: 100% !important;
+    }
+}
+
+
+/* alerts */
+
+
+.alert-info {
+  color: white;
+  background-color: #55A4A8;
+  border-color: #55A4A8;
+}
+.alert-info a {
+  color: black;
+}
+
+.alert-warning {
+  color: #955B00;
+  background-color: #FFCC7B;
+  border-color: #FFCC7B;
+}
+.alert-warning a {
+  color: black;
+}
+
+.alert-success {
+  color: #728500;
+  background-color: #E8F97E;
+  border-color: #E8F97E;
+}
+.alert-success a {
+  color: black;
+}
+
+.alert-success a.btn-primary {
+  color: white;
+}
+
+.alert-danger {
+  color: white;
+  background-color: #FF6951;
+  border-color: #FF6951;
+}
+.alert-danger a {
+  color: black;
+}
+
+/* badges */
+
+.btn-success, .badge-success {
+    background-color: #bbd329;
+    border-color: #bbd329;
+    color: black;
+}
+
+.btn-success:hover {
+ border-color: #D0E550;
+ background-color: #D0E550;
+ color: black;
+}
+
+.btn-info, .badge-info {
+ background-color: #1A7E83;
+ border-color: #1A7E83;
+}
+.btn-info:hover {
+ border-color: #328A8E;
+ background-color: #328A8E;
+}
+
+.btn-danger, .badge-danger {
+ background-color: #cf1f02;
+ border-color: #cf1f02;
+}
+.btn-danger:hover {
+ border-color: #F73C1E;
+ background-color: #F73C1E;
+}
+
+.btn-primary, .badge-primary {
+ background-color: #284B91;
+ border-color: #284B91;
+}
+.btn-primary:hover {
+ border-color: #41609D;
+ background-color: #41609D;
+}
+
+.btn-warning, .badge-warning {
+ background-color: #e79c26;
+ border-color: #e79c26;
+}
+.btn-warning:hover {
+ border-color: #F6B650;
+ background-color: #F6B650;
+}
+
+.card {
+ background-color: #f5f5f5;
+}
