@@ -1,4 +1,7 @@
 
+// Creating a global to confirm that the file loaded.
+var fileLoaded = "Yes, wing.vue.js did load."
+
 /*
  * Axios global settings
  */
