@@ -77,8 +77,7 @@ function inchesToMm(inches) {
   return (Number(inches) * 25.4).toFixed(2) + " mm";
 }
 
-// TODO: Should I use "let" instead of "var"? To avoid "hoisting"?
-var productObj = {
+let productObj = {
     name: productData.name,
     image: "http:" + productData.preview_uri,
     alt: "Photo of " + productData.name,
@@ -121,15 +120,21 @@ window.app = new Vue({
   el: "#app",
   data: {
     product: productObj,
-    //cart: wing.object({
-    //  fetch_api : '/api/cart/'
-    //})
+    cart: wing.object({
+      fetch_api : '/api/cart/'
+    })
   },
   methods: {
-    // TODO: Why should I use arrow functions? So I don't have to use "bind(this)"?
     buyClick: function(event) {
-      // TODO: Copy and adapt code from cart.tt -> add_item(sku_id).
-      alert(typeof(wing));
+      var self = this;
+      // TODO: Need this to go to a URL.
+      self.cart.call('POST','/api/cart//sku/'+productData.sku_id, {quantity : 1},
+        { on_success : function(properties) {
+          wing.success('Added!');
+          // self.cartitems.reset()._all();
+          // self.update_estimated_ship_date();
+        }
+      });
     }
   }
 })
