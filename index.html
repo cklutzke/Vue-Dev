@@ -17,23 +17,6 @@
   <link type="text/css" rel="stylesheet" href="/tgc6/css/main.css">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
-  <!-- TODO: Before distribution, make sure the Vue reference is to the prod version instead of the dev version, for better performance. -->
-
-  <script src="https://unpkg.com/babel-polyfill@6.26.0/dist/polyfill.min.js"></script><!-- IE 11 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
-  <script src="https://unpkg.com/bootstrap-vue@2.0.0-rc.2/dist/bootstrap-vue.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/vue2-filters@0.3.0/dist/vue2-filters.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/noty@3.2.0-beta/lib/noty.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
-  <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
-  <!-- TODO: Do I need the "?v=1" that was appended to these .js filenames in the requirements.tt file? -->
-  <script src="wing/wing.vue.js"></script>
-  <script src="tgc6/js/tgc.vue.js?v=1"></script>
-
-  <!-- TODO: I found this in cart.tt: do I need this too?
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
-  -->
-
   <!-- TODO: Set the favicon. -->
   <!-- TODO: Upddate this based on the displayed product. Probably requires looking into Vue Router. -->
   <title>BGC Proto 1</title>
@@ -95,6 +78,21 @@
     </div>
   </div>
 
+  <!-- TODO: Before distribution, make sure the Vue reference is to the prod version instead of the dev version, for better performance. -->
+  <script src="https://unpkg.com/babel-polyfill@6.26.0/dist/polyfill.min.js"></script><!-- IE 11 -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@2.0.0-rc.2/dist/bootstrap-vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue2-filters@0.3.0/dist/vue2-filters.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/noty@3.2.0-beta/lib/noty.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
+  <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
+  <!-- TODO: Do I need the "?v=1" that was appended to these .js filenames in the requirements.tt file? -->
+  <script src="wing/wing.vue.js?v=1"></script>
+  <script src="tgc6/js/tgc.vue.js?v=1"></script>
+
+  <!-- TODO: I found this in cart.tt: do I need this too?
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
+  -->
   <script src="Main.js"></script>
 
 </body>

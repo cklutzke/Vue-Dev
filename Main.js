@@ -129,7 +129,6 @@ window.app = new Vue({
     // TODO: Why should I use arrow functions? So I don't have to use "bind(this)"?
     buyClick: function(event) {
       // TODO: Copy and adapt code from cart.tt -> add_item(sku_id).
-      alert(fileLoaded);
       alert(typeof(wing));
     }
   }
