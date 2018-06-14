@@ -127,8 +127,8 @@ window.app = new Vue({
   methods: {
     buyClick: function(event) {
       var self = this;
-      // TODO: Need this to go to a URL.
-      self.cart.call('POST','/api/cart//sku/'+productData.sku_id, {quantity : 1},
+      // TODO: Is this the right URI to use for production?
+      self.cart.call('POST','https://www.thegamecrafter.com/api/cart//sku/'+productData.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
           // self.cartitems.reset()._all();

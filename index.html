@@ -14,7 +14,7 @@
   <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.2.0-beta/lib/themes/bootstrap-v4.css">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css"
     integrity="sha384-3AB7yXWz4OeoZcPbieVW64vVXEwADiYyAEhwilzWsLw+9FgqpyjjStpPnpBO8o8S" crossorigin="anonymous">
-  <link type="text/css" rel="stylesheet" href="/tgc6/css/main.css">
+  <link type="text/css" rel="stylesheet" href="tgc6/css/main.css">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
   <!-- TODO: Set the favicon. -->
@@ -34,12 +34,13 @@
               <b-img :src="product.image" :alt="product.alt" fluid />
             </b-container>
             <p>{{ product.description }}</p>
-            <!-- TODO: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too. -->
+            <!-- TODO: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too.
             <b-embed type="iframe"
                      aspect="16by9"
                      :src="product.video"
                      allowfullscreen
             ></b-embed>
+            -->
           </b-col>
           <b-col>
             <b-button-group>
