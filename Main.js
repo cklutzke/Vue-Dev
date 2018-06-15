@@ -66,15 +66,21 @@ const productData = {
 }
 
 function ouncesToGrams(ounces) {
-  // Returns a string in the format "#.## g".
-  // TODO: Throw an exception if ounces isNaN.
-  return (Number(ounces) * 28.35).toFixed(2) + " g";
+  // Returns a string in the format "#.## g" or an empty string.
+  if (isNaN(ounces)) {
+    return "";
+  } else {
+    return (Number(ounces) * 28.35).toFixed(2) + " g";
+  }
 }
 
 function inchesToMm(inches) {
-  // Returns a string in the format "#.## mm".
-  // TODO: Throw an exception if inches isNaN.
-  return (Number(inches) * 25.4).toFixed(2) + " mm";
+  // Returns a string in the format "#.## mm" or an empty string.
+  if (isNaN(inches)) {
+    return "";
+  } else {
+    return (Number(inches) * 25.4).toFixed(2) + " mm";
+  }
 }
 
 let productObj = {
@@ -121,7 +127,10 @@ window.app = new Vue({
   data: {
     product: productObj,
     cart: wing.object({
-      fetch_api : '/api/cart/'
+      fetch_api : '/api/cart/',
+      // TODO: If I don't sent credentials, I need to keep cart.id in localStorage or sessionStorage.
+      // TODO: It would be better if this process worked _with_ credentials.
+      with_credentials: false
     })
   },
   methods: {
