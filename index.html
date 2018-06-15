@@ -25,64 +25,76 @@
 <body>
 
   <div id="app">
-    <div id="product">
-      <h1>{{ product.name }}</h1>
-      <b-container>
-        <b-row>
-          <b-col>
+    <b-container>
+      <b-row>
+        <b-col>
+          <div id="product">
+            <h1>{{ product.name }}</h1>
             <b-container>
-              <b-img :src="product.image" :alt="product.alt" fluid />
+              <b-row>
+                <b-col>
+                  <b-container>
+                    <b-img :src="product.image" :alt="product.alt" fluid />
+                  </b-container>
+                  <p>{{ product.description }}</p>
+                  <!-- TODO: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too.
+                  <b-embed type="iframe"
+                           aspect="16by9"
+                           :src="product.video"
+                           allowfullscreen
+                  ></b-embed>
+                  -->
+                </b-col>
+                <b-col>
+                  <b-button-group>
+                    <!-- TODO: Any product like this that can be purchased in bulk
+                    should probably have controls to select the quantity to
+                    be ordered, which could in turn affect the subtotal price. -->
+                    <!-- TODO: Make these buttons do something. -->
+                    <b-button variant="primary" @click="buyClick">
+                      <!-- TODO: Insert the shopping cart glyphicon here. -->
+                      Buy for {{ product.unitPrice }}
+                    </b-button>
+                    <!-- TODO: Insert the gift glyphicon before this button's text. -->
+                    <b-dropdown text="Add to Wish List">
+                      <b-dropdown-item>New wish list</b-dropdown-item>
+                    </b-dropdown>
+                  </b-button-group>
+                  <div></div>
+                  <template>
+                    <b-table
+                      :items="product.vitalsTableItems"
+                      :fields="product.vitalsTableFields">
+                    </b-table>
+                  </template>
+                  <template>
+                    <b-table
+                      :items="product.priceTableItems"
+                      :fields="product.priceTableFields">
+                    </b-table>
+                  </template>
+                  <div>
+                    <p>Last Price Change: {{ product.lastPriceChange }}</p>
+                  </div>
+                </b-col>
+              </b-row>
             </b-container>
-            <p>{{ product.description }}</p>
-            <!-- TODO: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too.
-            <b-embed type="iframe"
-                     aspect="16by9"
-                     :src="product.video"
-                     allowfullscreen
-            ></b-embed>
-            -->
-          </b-col>
-          <b-col>
-            <b-button-group>
-              <!-- TODO: Any product like this that can be purchased in bulk
-              should probably have controls to select the quantity to
-              be ordered, which could in turn affect the subtotal price. -->
-              <!-- TODO: Make these buttons do something. -->
-              <b-button variant="primary" @click="buyClick">
-                <!-- TODO: Insert the shopping cart glyphicon here. -->
-                Buy for {{ product.unitPrice }}
-              </b-button>
-              <!-- TODO: Insert the gift glyphicon before this button's text. -->
-              <b-dropdown text="Add to Wish List">
-                <b-dropdown-item>New wish list</b-dropdown-item>
-              </b-dropdown>
-            </b-button-group>
-            <div></div>
-            <template>
-              <b-table
-                :items="product.vitalsTableItems"
-                :fields="product.vitalsTableFields">
-              </b-table>
-            </template>
-            <template>
-              <b-table
-                :items="product.priceTableItems"
-                :fields="product.priceTableFields">
-              </b-table>
-            </template>
-            <div>
-              <p>Last Price Change: {{ product.lastPriceChange }}</p>
-            </div>
-          </b-col>
-        </b-row>
-      </b-container>
-    </div>
+          </div>
+        </b-col>
+        <b-col cols="2">
+          <div id="cart">
+            <h1>Shopping Cart</h1>
+            <p>{{ cart.id }}</p>
+          </div>
+        </b-col>
+      </b-row>
+    </b-container>
   </div>
 
   <!-- TODO: Before distribution, make sure the Vue reference is to the prod version instead of the dev version, for better performance. -->
   <script src="https://unpkg.com/babel-polyfill@6.26.0/dist/polyfill.min.js"></script><!-- IE 11 -->
-  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.min.js"></script>
-  <script src="https://unpkg.com/bootstrap-vue@2.0.0-rc.2/dist/bootstrap-vue.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+  <script src="https://unpkg.com/bootstrap-vue@2.0.0-rc.2/dist/bootstrap-vue.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vue2-filters@0.3.0/dist/vue2-filters.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/noty@3.2.0-beta/lib/noty.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
