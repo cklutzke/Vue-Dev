@@ -50,13 +50,12 @@
                     <!-- TODO: Any product like this that can be purchased in bulk
                     should probably have controls to select the quantity to
                     be ordered, which could in turn affect the subtotal price. -->
-                    <!-- TODO: Make these buttons do something. -->
                     <b-button variant="primary" @click="buyClick">
                       <span class="fas fa-cart-plus"></span>
-                      <span class="fas fa-gift"></span>
                       Buy for {{ product.unitPrice }}
                     </b-button>
-                    <!-- TODO: Insert a Font Awesome gift icon before this dropwdown button's text. -->
+                    <!-- TODO: Insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text. -->
+                    <!-- TODO: Make this dropdown do something useful. -->
                     <b-dropdown text="Add to Wish List">
                       <b-dropdown-item>
                         New wish list
@@ -97,7 +96,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                          <!-- TODO: fix this
+                          <!-- TODO: See if I can get this to load and display cart items without generating errors.
                           <tr v-for="item in cartitems.objects">
                               <td style="max-width: 100px;"><a v-if="item.properties.preview_uri" :href="item.properties.shop_uri"><img :src="item.properties.preview_uri" alt="photo" class="img-fluid"></a></td>
                               <td>
@@ -130,13 +129,14 @@
   <script src="https://cdn.jsdelivr.net/npm/noty@3.2.0-beta/lib/noty.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
   <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
-  <!-- TODO: Do I need the "?v=1" that was appended to these .js filenames in the requirements.tt file? -->
+  <!-- TODO: Do I need the "?v=1" that was appended to this .js filename in the requirements.tt file? What does it mean? -->
   <script src="wing/wing.vue.js?v=1"></script>
-  <!--<script src="tgc6/js/tgc.vue.js?v=1"></script>-->
 
-  <!-- TODO: I found this in cart.tt: do I need this too?
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
-  -->
+  <!-- I found these in cart.tt but it seems I don't need them.
+    <script src="tgc6/js/tgc.vue.js?v=1">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
+  </script>-->
+
   <script src="Main.js"></script>
 
 </body>

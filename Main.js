@@ -134,8 +134,9 @@ window.app = new Vue({
     product: productObj,
     cart: wing.object({
       fetch_api : URI_prefix + '/api/cart/',
-      // TODO: If I don't send credentials, I need to keep cart.id in localStorage or sessionStorage.
+      // TODO: If I don't send credentials, I need to keep cart.id in localStorage.
       // TODO: It would be better if this process worked _with_ credentials.
+        // To get user info, call http:///api/session?_include_related_objects=user
       with_credentials: false
     })
     /*,
@@ -153,6 +154,7 @@ window.app = new Vue({
   methods: {
     buyClick: function(event) {
       var self = this;
+      // Have browser check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
       self.cart.call('POST', URI_prefix + '/api/cart//sku/'+productData.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
