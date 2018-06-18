@@ -52,12 +52,15 @@
                     be ordered, which could in turn affect the subtotal price. -->
                     <!-- TODO: Make these buttons do something. -->
                     <b-button variant="primary" @click="buyClick">
-                      <!-- TODO: Insert the shopping cart glyphicon here. -->
+                      <span class="fas fa-cart-plus"></span>
+                      <span class="fas fa-gift"></span>
                       Buy for {{ product.unitPrice }}
                     </b-button>
-                    <!-- TODO: Insert the gift glyphicon before this button's text. -->
+                    <!-- TODO: Insert a Font Awesome gift icon before this dropwdown button's text. -->
                     <b-dropdown text="Add to Wish List">
-                      <b-dropdown-item>New wish list</b-dropdown-item>
+                      <b-dropdown-item>
+                        New wish list
+                      </b-dropdown-item>
                     </b-dropdown>
                   </b-button-group>
                   <div></div>
@@ -81,10 +84,38 @@
             </b-container>
           </div>
         </b-col>
-        <b-col cols="2">
+        <b-col cols="3">
           <div id="cart">
             <h1>Shopping Cart</h1>
-            <p>{{ cart.id }}</p>
+              <div class="table-responsive">
+                  <table class="table">
+                      <thead>
+                      <tr>
+                          <th>Product</th>
+                          <th>Price</th>
+                          <th>Quantity</th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                          <!-- TODO: fix this
+                          <tr v-for="item in cartitems.objects">
+                              <td style="max-width: 100px;"><a v-if="item.properties.preview_uri" :href="item.properties.shop_uri"><img :src="item.properties.preview_uri" alt="photo" class="img-fluid"></a></td>
+                              <td>
+                                  <a :href="item.properties.shop_uri"><h4>{{item.properties.name}}</h4></a>
+                                  <button class="btn btn-secondary btn-sm" @click="remove_item(item)"><i class="fas fa-trash-alt"></i> Remove</button>
+                              </td>
+                              <td><h4 class="text-success font-weight-bold">{{item.properties.price_each|currency}}</h4></td>
+                              <td><input type="number" min="1" class="form-control" v-model="item.properties.quantity" @change="update_quantity(item)" style="max-width: 100px"></td>
+                          </tr>
+                          <tr class="d-none d-md-table-row">
+                              <td class="text-right" colspan="4">
+                                  <h4>Subtotal ({{item_count}} items): <span class="text-success font-weight-bold">{{cart.properties.subtotal|currency}}</span></h4>
+                              </td>
+                          </tr>
+                        -->
+                      </tbody>
+                  </table>
+              </div>
           </div>
         </b-col>
       </b-row>
@@ -101,7 +132,7 @@
   <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
   <!-- TODO: Do I need the "?v=1" that was appended to these .js filenames in the requirements.tt file? -->
   <script src="wing/wing.vue.js?v=1"></script>
-  <script src="tgc6/js/tgc.vue.js?v=1"></script>
+  <!--<script src="tgc6/js/tgc.vue.js?v=1"></script>-->
 
   <!-- TODO: I found this in cart.tt: do I need this too?
   <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>

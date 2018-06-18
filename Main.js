@@ -122,22 +122,38 @@ let productObj = {
     lastPriceChange: productData.last_price_change.split(" ")[0]
 }
 
+// TODO: Is this the right URI to use for production?
+const URI_prefix = "https://www.thegamecrafter.com";
+
+// TODO: I'm trying to get this working with a hardcoaded cart ID. Replace it later.
+const cartid = "4C8E4648-7028-11E8-9B8A-7A2F94A6FE1D";
+
 window.app = new Vue({
   el: "#app",
   data: {
     product: productObj,
     cart: wing.object({
-      fetch_api : '/api/cart/',
-      // TODO: If I don't sent credentials, I need to keep cart.id in localStorage or sessionStorage.
+      fetch_api : URI_prefix + '/api/cart/',
+      // TODO: If I don't send credentials, I need to keep cart.id in localStorage or sessionStorage.
       // TODO: It would be better if this process worked _with_ credentials.
       with_credentials: false
     })
+    /*,
+    cartitems : wing.object_list({
+        create_api : URI_prefix + '/api/game',
+        list_api : URI_prefix + '/api/cart/' + cartid + '/items',
+        params : { _items_per_page : 100, _order_by : 'name'},
+        on_delete : function(object, index) {
+            wing.success(properties.name + ' removed.');
+            vm.$data.cart.fetch();
+        },
+    })
+    */
   },
   methods: {
     buyClick: function(event) {
       var self = this;
-      // TODO: Is this the right URI to use for production?
-      self.cart.call('POST','https://www.thegamecrafter.com/api/cart//sku/'+productData.sku_id, {quantity : 1},
+      self.cart.call('POST', URI_prefix + '/api/cart//sku/'+productData.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
           // self.cartitems.reset()._all();
