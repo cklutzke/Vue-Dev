@@ -1,10 +1,4 @@
 
-// TODO: Get productData from the server.
-// part ID = DF0FDE0C-9A04-11E0-AACC-432941C43697
-// API call is "GET /api/part/xxx".
-
-
-
 // productData represents product data from the server.
 const productData = {
   "badge" : null,
@@ -89,12 +83,7 @@ function inchesToMm(inches) {
 }
 
 let productObj = {
-    name: productData.name,
-    image: "http:" + productData.preview_uri,
-    alt: "Photo of " + productData.name,
     description: productData.description,
-    // Youtube URLs must be in this "/embed/" format - see https://stackoverflow.com/questions/9934944
-    video: "https://www.youtube.com/embed/" + productData.youtube_video_id,
     unitPrice: "$" + Number(productData.price).toFixed(2),
     vitalsTableItems: [
       {key: "Quantity in Stock", value1: productData.quantity, value2: ""},
@@ -135,10 +124,19 @@ const test_password = "TODO"; // TODO: Change my TGC password to something uniqu
 // TODO: Is this the right URI to use for production?
 const URI_prefix = "https://www.thegamecrafter.com";
 
+// TODO: Get productData from the server. API call is "GET /api/part/xxx".
+const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
+
+console.log("Creating Vue object now.");
+
 window.app = new Vue({
   el: "#app",
   data: {
     product: productObj,
+    vueProduct: wing.object({
+      fetch_api: URI_prefix + "/api/part/" + partID,
+      with_credentials: false
+    }),
     cart: wing.object({
       fetch_api : URI_prefix + '/api/cart/',
       // TODO: If I don't send credentials, I need to keep cart.id in localStorage.
@@ -170,5 +168,10 @@ window.app = new Vue({
         }
       });
     }
+  },
+  created() {
+    console.log("Getting ready to fetch.");
+    this.vueProduct.fetch();
+    console.log("Fetch complete.");
   }
 })
