@@ -1,5 +1,10 @@
 
-/* TODO: Get productData from the server. */
+// TODO: Get productData from the server.
+// part ID = DF0FDE0C-9A04-11E0-AACC-432941C43697
+// API call is "GET /api/part/xxx".
+
+
+
 // productData represents product data from the server.
 const productData = {
   "badge" : null,
@@ -122,11 +127,13 @@ let productObj = {
     lastPriceChange: productData.last_price_change.split(" ")[0]
 }
 
+// The "Static TGC" application's API key, created at https://www.thegamecrafter.com/account/apikeys.
+const api_key = "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D";
+const test_user_id = "carl@phos.net";
+const test_password = "TODO"; // TODO: Change my TGC password to something unique while I work on this.
+
 // TODO: Is this the right URI to use for production?
 const URI_prefix = "https://www.thegamecrafter.com";
-
-// TODO: I'm trying to get this working with a hardcoaded cart ID. Replace it later.
-const cartid = "4C8E4648-7028-11E8-9B8A-7A2F94A6FE1D";
 
 window.app = new Vue({
   el: "#app",
