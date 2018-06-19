@@ -77,8 +77,8 @@
                     </b-table>
                   </template>
                   <div>
-                    <!-- TODO: Why does this generate a Vue warning _after_ the data has been retrieved? -->
-                    <p>Last Price Change: {{ vueProduct.properties.last_price_change.split(" ")[0] }}</p>
+                    <p>Last Price Change: {{ vueProduct.properties.last_price_change === undefined ?
+                      "" : vueProduct.properties.last_price_change.split(" ")[0] }}</p>
                   </div>
                 </b-col>
               </b-row>
@@ -87,11 +87,11 @@
         </b-col>
         <b-col cols="3">
           <div id="sessionData">
-            <!-- TODO: Populate these fields. -->
+            <!-- TODO: Display this information more appropriately, if at all. -->
             <h1>Session Data</h1>
             <p>Session ID: {{ session.properties.id }}</p>
             <p>User ID: {{ session.properties.user_id }}</p>
-            <p>User Name: </p>
+            <p>User Name: {{ userName }}</p>
             <p>Cart ID: {{ cart.properties.id }}</p>
           </div>
           <div id="cart">
