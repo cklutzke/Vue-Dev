@@ -53,7 +53,7 @@
                     be ordered, which could in turn affect the subtotal price. -->
                     <b-button variant="primary" @click="buyClick">
                       <span class="fas fa-cart-plus"></span>
-                      Buy for {{ product.unitPrice }}
+                      Buy for {{ "$" + Number(vueProduct.properties.price).toFixed(2) }}
                     </b-button>
                     <!-- TODO: Insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text. -->
                     <!-- TODO: Make this dropdown do something useful. -->
@@ -77,7 +77,7 @@
                     </b-table>
                   </template>
                   <div>
-                    <p>Last Price Change: {{ product.lastPriceChange }}</p>
+                    <p>Last Price Change: {{ vueProduct.properties.last_price_change.split(" ")[0] }}</p>
                   </div>
                 </b-col>
               </b-row>
@@ -136,7 +136,7 @@
   <!-- TODO: Do I need the "?v=1" that was appended to this .js filename in the requirements.tt file? What does it mean? -->
   <script src="wing/wing.vue.js?v=1"></script>
 
-  <!-- I found these in cart.tt but it seems I don't need them.
+  <!-- TODO: I found these in cart.tt. Do I need them for some reason?
     <script src="tgc6/js/tgc.vue.js?v=1">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
   </script>-->
