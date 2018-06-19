@@ -1,9 +1,4 @@
 
-// The "Static TGC" application's API key, created at https://www.thegamecrafter.com/account/apikeys.
-const api_key = "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D";
-const test_user_id = "carl@phos.net";
-const test_password = "TODO"; // TODO: Change my TGC password to something unique while I work on this.
-
 // TODO: Is this the right URI to use for production?
 const URI_prefix = "https://www.thegamecrafter.com";
 
@@ -76,6 +71,9 @@ console.log("Creating Vue object now.");
 window.app = new Vue({
   el: "#app",
   data: {
+    session: wing.object({
+      with_credentials: false
+    }),
     product: productObj,
     vueProduct: wing.object({
       fetch_api: URI_prefix + "/api/part/" + partID,
@@ -104,7 +102,7 @@ window.app = new Vue({
     buyClick: function(event) {
       var self = this;
       // Have browser check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
-      self.cart.call('POST', URI_prefix + '/api/cart//sku/'+productData.sku_id, {quantity : 1},
+      self.cart.call('POST', URI_prefix + '/api/cart//sku/' + this.vueProduct.properties.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
           // self.cartitems.reset()._all();
@@ -113,8 +111,24 @@ window.app = new Vue({
       });
     }
   },
-  created() {
-    console.log("Getting ready to fetch.");
+  mounted() {
+    // TODO: If localStorage.tgcStaticSession is undefined...
+    console.log("Getting ready to log in.");
+    this.session.call('POST', URI_prefix + '/api/session', {
+        username: "carl@phos.net",
+        password: "statictgc",
+        api_key_id: "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D"
+      },{
+        on_success: function(properties) {
+          console.log("Logged in.");
+          // TODO: Store the session ID in localStorage.
+        },
+        on_error: function(properties) {
+          console.log("Login failed.");
+        }
+      }
+    )
+    console.log("Getting ready to fetch data.");
     this.vueProduct.fetch();
     console.log("Fetch complete.");
   }

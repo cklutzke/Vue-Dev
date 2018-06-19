@@ -55,7 +55,7 @@
                       <span class="fas fa-cart-plus"></span>
                       Buy for {{ "$" + Number(vueProduct.properties.price).toFixed(2) }}
                     </b-button>
-                    <!-- TODO: Insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text. -->
+                    <!-- TODO: Insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text property. -->
                     <!-- TODO: Make this dropdown do something useful. -->
                     <b-dropdown text="Add to Wish List">
                       <b-dropdown-item>
@@ -77,6 +77,7 @@
                     </b-table>
                   </template>
                   <div>
+                    <!-- TODO: Why does this generate a Vue warning _after_ the data has been retrieved? -->
                     <p>Last Price Change: {{ vueProduct.properties.last_price_change.split(" ")[0] }}</p>
                   </div>
                 </b-col>
@@ -85,11 +86,16 @@
           </div>
         </b-col>
         <b-col cols="3">
+          <div id="sessionData">
+            <!-- TODO: Populate these fields. -->
+            <h1>Session Data</h1>
+            <p>Session ID: {{ session.properties.id }}</p>
+            <p>User ID: {{ session.properties.user_id }}</p>
+            <p>User Name: </p>
+            <p>Cart ID: {{ cart.properties.id }}</p>
+          </div>
           <div id="cart">
             <h1>Shopping Cart</h1>
-              <div>
-                <p>Cart ID: {{ cart.properties.id }}</p>
-              </div>
               <div class="table-responsive">
                   <table class="table">
                       <thead>
