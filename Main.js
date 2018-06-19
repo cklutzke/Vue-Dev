@@ -66,13 +66,24 @@ let productObj = {
     ]
 }
 
-console.log("Creating Vue object now.");
+console.log("Creating Vue objects now.");
 
 window.app = new Vue({
   el: "#app",
   data: {
     session: wing.object({
-      with_credentials: false
+      create_api: URI_prefix + "/api/session",
+      with_credentials: false,
+      on_create: function(properties) {
+        console.log("Logged in.");
+      },
+      on_delete: function(properties) {
+        console.log("Logged out.");
+      },
+      params: {
+        "_include_related_objects": ["user"],
+        api_key_id: "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D"
+      }
     }),
     product: productObj,
     vueProduct: wing.object({
@@ -98,13 +109,29 @@ window.app = new Vue({
   computed: {
     userName: function() {
       if (this.session.properties.user === undefined) {
-        return "";
+        return "Not logged in.";
       } else {
         return this.session.properties.user.display_name;
       }
     }
   },
   methods: {
+    logOutClick: function(event) {
+      // A real app would confirm the button click....
+      // TODO: Why isn't this working now?
+      this.session.delete({
+        skip_confirm: true
+      });
+      /*
+      var self = this;
+      self.cart.call('DELETE', URI_prefix + '/api/session/' + this.session.properties.id, {},
+        { on_success : function(properties) {
+          self.session.reset();
+          wing.success('Logged out.');
+        }
+      });
+      */
+    },
     buyClick: function(event) {
       var self = this;
       // Have browser check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
@@ -112,6 +139,7 @@ window.app = new Vue({
       self.cart.call('POST', URI_prefix + '/api/cart//sku/' + this.vueProduct.properties.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
+          // TODO: Fetch the updated session data.
           // self.cartitems.reset()._all();
           // self.update_estimated_ship_date();
         }
@@ -119,23 +147,15 @@ window.app = new Vue({
     }
   },
   mounted() {
+    // TODO: Get the login credentials from the form.
     console.log("Getting ready to log in.");
-    this.session.call('POST', URI_prefix + '/api/session?_include_related_objects=user', {
-        username: "carl@phos.net",
-        password: "statictgc",
-        api_key_id: "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D"
-      },{
-        on_success: function(properties) {
-          console.log("Logged in.");
-        },
-        on_error: function(properties) {
-          console.log("Login failed.");
-        }
-      }
-    )
+    this.session.create({
+      username: "carl@phos.net",
+      password: "statictgc"
+    });
     // TODO: Check localStorage to see if there's a cart ID.
     console.log("Getting ready to fetch product data.");
     this.vueProduct.fetch();
-    console.log("Fetch complete.");
+    console.log("Product data fetched.");
   }
 })

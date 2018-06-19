@@ -93,6 +93,10 @@
             <p>User ID: {{ session.properties.user_id }}</p>
             <p>User Name: {{ userName }}</p>
             <p>Cart ID: {{ cart.properties.id }}</p>
+            <b-button variant="secondary" @click="logOutClick">
+              Log Out
+            </b-button>
+            <p />
           </div>
           <div id="cart">
             <h1>Shopping Cart</h1>
