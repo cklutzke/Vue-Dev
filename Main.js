@@ -70,15 +70,12 @@ window.app = new Vue({
       create_api: URI_prefix + "/api/session",
       with_credentials: false,
       on_create: function(properties) {
-        console.log("Logged in.");
-        // TODO: Why aren't these statements working?
-        self.login.username = '';
-        self.login.password = '';
-        self.login.show = false;
+        window.app.$data.login.username = '';
+        window.app.$data.login.password = '';
+        window.app.$data.login.show = false;
       },
       on_delete: function(properties) {
-        console.log("Logged out.");
-        this.login.show = true;
+        window.app.$data.login.show = true;
       },
       params: {
         "_include_related_objects": ["user"],
@@ -148,7 +145,6 @@ window.app = new Vue({
           fn._withTask.fn._withTask @ vue.js:1828
       */
       this.session.delete({
-        //skip_confirm: true
       });
       /* The code below did log me out, but didn't refresh the page.
       var self = this;
