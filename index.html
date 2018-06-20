@@ -86,14 +86,32 @@
           </div>
         </b-col>
         <b-col cols="3">
+          <div id="login">
+            <b-form @submit="onLoginSubmit" @reset="onLoginReset" v-if="login.show">
+              <h1>Log In</h1>
+              <b-form-group id="userNameInputGroup" label="User Name:" label-for="userNameInput">
+                <b-form-input id="userNameInput" type="text" v-model="login.username"
+                  required placeholder="Enter username">
+                </b-form-input>
+              </b-form-group>
+              <b-form-group id="passwordInputGroup" label="Password:" label-for="passwordInput">
+                <b-form-input id="passwordInput" type="password" v-model="login.password"
+                  required placeholder="Enter password">
+                </b-form-input>
+              </b-form-group>
+              <b-button type="submit" variant="primary">Submit</b-button>
+              <b-button type="reset" variant="secondary">Reset</b-button>
+              <p />
+            </b-form>
+          </div>
           <div id="sessionData">
             <!-- TODO: Display this information more appropriately, if at all. -->
-            <h1>Session Data</h1>
+            <h1>Session Info</h1>
             <p>Session ID: {{ session.properties.id }}</p>
             <p>User ID: {{ session.properties.user_id }}</p>
             <p>User Name: {{ userName }}</p>
             <p>Cart ID: {{ cart.properties.id }}</p>
-            <b-button variant="secondary" @click="logOutClick">
+            <b-button variant="secondary" @click="logOutClick" v-if="!login.show">
               Log Out
             </b-button>
             <p />

@@ -66,19 +66,27 @@ let productObj = {
     ]
 }
 
-console.log("Creating Vue objects now.");
-
 window.app = new Vue({
   el: "#app",
   data: {
+    login: {
+      show: true,
+      username: "",
+      password: ""
+    },
     session: wing.object({
       create_api: URI_prefix + "/api/session",
       with_credentials: false,
       on_create: function(properties) {
         console.log("Logged in.");
+        // TODO: Why aren't these statements working?
+        self.login.username = '';
+        self.login.password = '';
+        self.login.show = false;
       },
       on_delete: function(properties) {
         console.log("Logged out.");
+        this.login.show = true;
       },
       params: {
         "_include_related_objects": ["user"],
@@ -116,13 +124,38 @@ window.app = new Vue({
     }
   },
   methods: {
-    logOutClick: function(event) {
-      // A real app would confirm the button click....
-      // TODO: Why isn't this working now?
-      this.session.delete({
-        skip_confirm: true
+    onLoginSubmit (evt) {
+      evt.preventDefault();
+      this.session.create({
+        username: this.login.username,
+        password: this.login.password
       });
+    },
+    onLoginReset (evt) {
+      evt.preventDefault();
+      this.login.username = '';
+      this.login.password = '';
+      /* Trick to reset/clear native browser form validation state */
+      this.login.show = false;
+      this.$nextTick(() => { this.login.show = true });
+    },
+    logOutClick: function(event) {
+      // TODO: A call to https://www.thegamecrafter.com/api/session/[session ID] shows this doesn't work.
+      // Network activity shows it didn't actually call the server. See error below:
       /*
+      Uncaught (in promise) TypeError: Cannot read property 'data' of undefined
+          at wing.vue.js?v=1:444
+          (anonymous) @ wing.vue.js?v=1:444
+          Promise.catch (async)
+          delete @ wing.vue.js?v=1:442
+          logOutClick @ Main.js:122
+          invoker @ vue.js:2025
+          fn._withTask.fn._withTask @ vue.js:1828
+      */
+      this.session.delete({
+        //skip_confirm: true
+      });
+      /* The code below did log me out, but didn't refresh the page.
       var self = this;
       self.cart.call('DELETE', URI_prefix + '/api/session/' + this.session.properties.id, {},
         { on_success : function(properties) {
@@ -134,28 +167,18 @@ window.app = new Vue({
     },
     buyClick: function(event) {
       var self = this;
-      // Have browser check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
       // TODO: Show the contents of the cart.
+      // For now, check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
       self.cart.call('POST', URI_prefix + '/api/cart//sku/' + this.vueProduct.properties.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
-          // TODO: Fetch the updated session data.
           // self.cartitems.reset()._all();
-          // self.update_estimated_ship_date();
         }
       });
     }
   },
   mounted() {
-    // TODO: Get the login credentials from the form.
-    console.log("Getting ready to log in.");
-    this.session.create({
-      username: "carl@phos.net",
-      password: "statictgc"
-    });
     // TODO: Check localStorage to see if there's a cart ID.
-    console.log("Getting ready to fetch product data.");
     this.vueProduct.fetch();
-    console.log("Product data fetched.");
   }
 })
