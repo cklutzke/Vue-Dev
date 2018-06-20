@@ -111,7 +111,7 @@ window.app = new Vue({
     */
   },
   computed: {
-    // TODO: This isn't updating correctly when fetching an existing session.
+    // TODO: Fetch isn't getting related data for the session, so this data is missing.
     userName: function() {
       if (this.session.properties.user === undefined) {
         return "Not logged in.";
@@ -146,21 +146,21 @@ window.app = new Vue({
       // The kludge code below does log me out.
       self.session.call('DELETE', URI_prefix + '/api/session/' + this.session.properties.id, {},
         { on_success : function(properties) {
-          // TODO: The code below should be in session.on_delete().
+          // TODO: When delete() works, the code below should be in session.on_delete().
           window.app.$data.login.show = true;
-          localStorage.removeItem("tgc_session_id");
           // TODO: Clear the cart ID from localStorage?
+          localStorage.removeItem("tgc_session_id");
         }
       });
     },
     buyClick: function(event) {
       var self = this;
-      // TODO: Show the contents of the cart.
+      // TODO 1: Show the contents of the cart.
       // For now, check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
       self.cart.call('POST', URI_prefix + '/api/cart//sku/' + this.vueProduct.properties.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
-          // TODO: Add the cart ID to localStorage
+          // TODO 2: Add the cart ID to localStorage
           // self.cartitems.reset()._all();
         }
       });
