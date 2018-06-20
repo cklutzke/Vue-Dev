@@ -62,20 +62,24 @@ window.app = new Vue({
   data: {
     login: {
       show: true,
-      username: "",
+      username: "carl@phos.net", // TODO: Remove this later.
       password: ""
     },
     priceTableItems: [],
     session: wing.object({
-      create_api: URI_prefix + "/api/session",
       with_credentials: false,
+      create_api: URI_prefix + "/api/session",
       on_create: function(properties) {
-        window.app.$data.login.username = '';
-        window.app.$data.login.password = '';
+        window.app.$data.login.username = "";
+        window.app.$data.login.password = "";
+        window.app.$data.login.show = false;
+        localStorage.setItem("tgc_session_id", window.app.$data.session.properties.id)
+      },
+      fetch_api: URI_prefix + "/api/session/" + localStorage.tgc_session_id,
+      on_fetch: function(properties) {
         window.app.$data.login.show = false;
       },
       on_delete: function(properties) {
-        window.app.$data.login.show = true;
       },
       params: {
         "_include_related_objects": ["user"],
@@ -107,6 +111,7 @@ window.app = new Vue({
     */
   },
   computed: {
+    // TODO: This isn't updating correctly when fetching an existing session.
     userName: function() {
       if (this.session.properties.user === undefined) {
         return "Not logged in.";
@@ -132,29 +137,21 @@ window.app = new Vue({
       this.$nextTick(() => { this.login.show = true });
     },
     logOutClick: function(event) {
-      // TODO: A call to https://www.thegamecrafter.com/api/session/[session ID] shows this doesn't work.
-      // Network activity shows it didn't actually call the server. See error below:
-      /*
-      Uncaught (in promise) TypeError: Cannot read property 'data' of undefined
-          at wing.vue.js?v=1:444
-          (anonymous) @ wing.vue.js?v=1:444
-          Promise.catch (async)
-          delete @ wing.vue.js?v=1:442
-          logOutClick @ Main.js:122
-          invoker @ vue.js:2025
-          fn._withTask.fn._withTask @ vue.js:1828
-      */
-      this.session.delete({
-      });
-      /* The code below did log me out, but didn't refresh the page.
       var self = this;
-      self.cart.call('DELETE', URI_prefix + '/api/session/' + this.session.properties.id, {},
+      /*
+      // TODO: A call to https://www.thegamecrafter.com/api/session/[session ID] shows the code below doesn't work.
+      // JT says this is an error in his code, he'll fix it later.
+      self.session.delete({});
+      */
+      // The kludge code below does log me out.
+      self.session.call('DELETE', URI_prefix + '/api/session/' + this.session.properties.id, {},
         { on_success : function(properties) {
-          self.session.reset();
-          wing.success('Logged out.');
+          // TODO: The code below should be in session.on_delete().
+          window.app.$data.login.show = true;
+          localStorage.removeItem("tgc_session_id");
+          // TODO: Clear the cart ID from localStorage?
         }
       });
-      */
     },
     buyClick: function(event) {
       var self = this;
@@ -163,13 +160,25 @@ window.app = new Vue({
       self.cart.call('POST', URI_prefix + '/api/cart//sku/' + this.vueProduct.properties.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
+          // TODO: Add the cart ID to localStorage
           // self.cartitems.reset()._all();
         }
       });
     }
   },
   mounted() {
-    // TODO: Check localStorage to see if there's a cart ID.
     this.vueProduct.fetch();
+
+    console.log(localStorage.getItem("tgc_session_id"));
+    if (localStorage.getItem("tgc_session_id")) {
+      this.session.fetch({});
+    } else {
+      this.login.show;
+    }
+
+    // TODO: If localStorage has a cart ID...
+      // Fetch and display the cart info
+    // else show the cart as empty
+
   }
 })
