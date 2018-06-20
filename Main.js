@@ -2,20 +2,6 @@
 // TODO: Is this the right URI to use for production?
 const URI_prefix = "https://www.thegamecrafter.com";
 
-// TODO: Get all product data from the server and remove the productData constant.
-const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
-const productData = {
-  "depth" : 0.4,
-  "height" : 0.63,
-  "id" : "DF0FDE0C-9A04-11E0-AACC-432941C43697",
-  "price" : "0.1171",
-  "price_10" : "0.0806",
-  "price_100" : "0.0644",
-  "price_1000" : "0.0384",
-  "quantity" : 6484,
-  "width" : 0.61,
-}
-
 function ouncesToGrams(ounces) {
   // Returns a string in the format "#.## g" or an empty string.
   if (isNaN(ounces)) {
@@ -34,12 +20,26 @@ function inchesToMm(inches) {
   }
 }
 
-// TODO: How can I generate these tables AFTER I get the product data from the server?
+// TODO: Get all product data from the server and remove the productData constant.
+// TODO: Add Color, Category, and Material. With links to other matching parts.
+// TODO: Provide dropdowns to select different colors, materials, and sizes.
+const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
+const productData = {
+  "depth" : 0.4,
+  "height" : 0.63,
+  "id" : "DF0FDE0C-9A04-11E0-AACC-432941C43697",
+  "price" : "0.1171",
+  "price_10" : "0.0806",
+  "price_100" : "0.0644",
+  "price_1000" : "0.0384",
+  "quantity" : 6484,
+  "width" : 0.61,
+}
+
+// TODO: Can I generate these tables in response to the product's on_fetch event?
 let productObj = {
     vitalsTableItems: [
       {key: "Quantity in Stock", value1: productData.quantity, value2: ""},
-      // TODO: Add Color, Category, and Material. With links to other matching parts.
-      // TODO: Provide dropdowns to select different colors, materials, and sizes.
       {key: "Weight", value1: Number(productData.weight).toFixed(2) + " oz",
         value2: ouncesToGrams(productData.weight)},
       {key: "Height", value1: Number(productData.height).toFixed(2) + " in",
@@ -49,20 +49,11 @@ let productObj = {
       {key: "Depth", value1: Number(productData.depth).toFixed(2) + " in",
         value2: inchesToMm(productData.depth)}
     ],
-    vitalsTableFields: [
-      {key: "key", label: "Vitals"},
-      {key: "value1", label: ""},
-      {key: "value2", label: ""}
-    ],
     priceTableItems: [
       {range: "1-9", ea: "$" + productData.price + " ea"},
       {range: "10-99", ea: "$" + productData.price_10 + " ea"},
       {range: "100-999", ea: "$" + productData.price_100 + " ea"},
       {range: "1000+", ea: "$" + productData.price_1000 + " ea"}
-    ],
-    priceTableFields: [
-      {key: "range", label: "Bulk Pricing"},
-      {key: "ea", label: ""}
     ]
 }
 
@@ -74,6 +65,7 @@ window.app = new Vue({
       username: "",
       password: ""
     },
+    priceTableItems: [],
     session: wing.object({
       create_api: URI_prefix + "/api/session",
       with_credentials: false,
@@ -96,7 +88,10 @@ window.app = new Vue({
     product: productObj,
     vueProduct: wing.object({
       fetch_api: URI_prefix + "/api/part/" + partID,
-      with_credentials: false
+      with_credentials: false,
+      on_fetch: function() {
+        console.log("Product data has been fetched.");
+      }
     }),
     cart: wing.object({
       fetch_api : URI_prefix + '/api/cart/',

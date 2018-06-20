@@ -67,13 +67,20 @@
                   <template>
                     <b-table
                       :items="product.vitalsTableItems"
-                      :fields="product.vitalsTableFields">
+                      :fields='[
+                        {key: "key", label: "Vitals"},
+                        {key: "value1", label: ""},
+                        {key: "value2", label: ""}
+                      ]'>
                     </b-table>
                   </template>
                   <template>
                     <b-table
                       :items="product.priceTableItems"
-                      :fields="product.priceTableFields">
+                      :fields='[
+                        {key: "range", label: "Bulk Pricing"},
+                        {key: "ea", label: ""}
+                      ]'>
                     </b-table>
                   </template>
                   <div>
@@ -161,14 +168,8 @@
   <script src="https://cdn.jsdelivr.net/npm/noty@3.2.0-beta/lib/noty.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
   <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
-  <!-- TODO: Do I need the "?v=1" that was appended to this .js filename in the requirements.tt file? What does it mean? -->
   <script src="wing/wing.vue.js?v=1"></script>
-
-  <!-- TODO: I found these in cart.tt. Do I need them for some reason?
-    <script src="tgc6/js/tgc.vue.js?v=1">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.0/moment.min.js"></script>
-  </script>-->
-
+  <!-- TODO: Should I add "?v=1" to the end of my JavaScript filename here? -->
   <script src="Main.js"></script>
 
 </body>
