@@ -135,22 +135,12 @@
                       </tr>
                       </thead>
                       <tbody>
-                          <!-- TODO: See if I can get this to load and display cart items without generating errors.
-                          <tr v-for="item in cartitems.objects">
-                              <td style="max-width: 100px;"><a v-if="item.properties.preview_uri" :href="item.properties.shop_uri"><img :src="item.properties.preview_uri" alt="photo" class="img-fluid"></a></td>
-                              <td>
-                                  <a :href="item.properties.shop_uri"><h4>{{item.properties.name}}</h4></a>
-                                  <button class="btn btn-secondary btn-sm" @click="remove_item(item)"><i class="fas fa-trash-alt"></i> Remove</button>
-                              </td>
-                              <td><h4 class="text-success font-weight-bold">{{item.properties.price_each|currency}}</h4></td>
-                              <td><input type="number" min="1" class="form-control" v-model="item.properties.quantity" @change="update_quantity(item)" style="max-width: 100px"></td>
+                          <!-- TODO: See if I can get this to load and display cart items without generating errors. -->
+                          <tr v-for="item in cart.properties.items">
+                              <td>{{ item.name }}</td>
+                              <td>{{ item.price_each }}</td>
+                              <td>{{ item.quantity }}</td>
                           </tr>
-                          <tr class="d-none d-md-table-row">
-                              <td class="text-right" colspan="4">
-                                  <h4>Subtotal ({{item_count}} items): <span class="text-success font-weight-bold">{{cart.properties.subtotal|currency}}</span></h4>
-                              </td>
-                          </tr>
-                        -->
                       </tbody>
                   </table>
               </div>

@@ -124,17 +124,6 @@ window.app = new Vue({
                 api_key_id: StaticTGC_api_key_id
             }
         })
-        /*,
-        cartitems : wing.object_list({
-            create_api : URI_prefix + '/api/game',
-            list_api : URI_prefix + '/api/cart/' + cartid + '/items',
-            params : { _items_per_page : 100, _order_by : 'name'},
-            on_delete : function(object, index) {
-                wing.success(properties.name + ' removed.');
-                vm.$data.cart.fetch();
-            },
-        })
-        */
     },
     computed: {
         // BUG: Fetch (GET) isn't returning related objects for the session, so user data is missing.
@@ -174,6 +163,7 @@ window.app = new Vue({
                 { on_success : function(properties) {
                     // TEMP: When delete() works, the code below should be in session.on_delete().
                     window.app.$data.login.show = true;
+                    // TODO: Delete the cart.
                     localStorage.removeItem("tgc_cart_id");
                     localStorage.removeItem("tgc_session_id");
                 }
