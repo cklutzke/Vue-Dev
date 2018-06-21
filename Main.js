@@ -22,40 +22,32 @@ function inchesToMm(inches) {
   }
 }
 
-// IDEA: Add Color, Category, and Material. With links to other matching parts.
-// IDEA: Provide dropdowns to select different colors, materials, and sizes.
 const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
-const productData = {
-  "depth" : 0.4,
-  "height" : 0.63,
-  "id" : "DF0FDE0C-9A04-11E0-AACC-432941C43697",
-  "price" : "0.1171",
-  "price_10" : "0.0806",
-  "price_100" : "0.0644",
-  "price_1000" : "0.0384",
-  "quantity" : 6484,
-  "width" : 0.61,
+
+function getPriceTableItems(productProperties) {
+    console.log("getPriceTableItems");
+    return [
+      {range: "1-9", ea: "$" + productProperties.price + " ea"},
+      {range: "10-99", ea: "$" + productProperties.price_10 + " ea"},
+      {range: "100-999", ea: "$" + productProperties.price_100 + " ea"},
+      {range: "1000+", ea: "$" + productProperties.price_1000 + " ea"}
+  ];
 }
 
-// TEMP: Generate these tables from server data in response to the product's on_fetch event?
-let productObj = {
-    vitalsTableItems: [
-      {key: "Quantity in Stock", value1: productData.quantity, value2: ""},
-      {key: "Weight", value1: Number(productData.weight).toFixed(2) + " oz",
-        value2: ouncesToGrams(productData.weight)},
-      {key: "Height", value1: Number(productData.height).toFixed(2) + " in",
-        value2: inchesToMm(productData.height)},
-      {key: "Width", value1: Number(productData.width).toFixed(2) + " in",
-        value2: inchesToMm(productData.width)},
-      {key: "Depth", value1: Number(productData.depth).toFixed(2) + " in",
-        value2: inchesToMm(productData.depth)}
-    ],
-    priceTableItems: [
-      {range: "1-9", ea: "$" + productData.price + " ea"},
-      {range: "10-99", ea: "$" + productData.price_10 + " ea"},
-      {range: "100-999", ea: "$" + productData.price_100 + " ea"},
-      {range: "1000+", ea: "$" + productData.price_1000 + " ea"}
-    ]
+// IDEA: Add Color, Category, and Material. With links to other matching parts.
+// IDEA: Provide dropdowns to select different colors, materials, and sizes.
+function getVitalsTableItems(productProperties) {
+    return [
+      {key: "Quantity in Stock", value1: productProperties.quantity, value2: ""},
+      {key: "Weight", value1: Number(productProperties.weight).toFixed(2) + " oz",
+        value2: ouncesToGrams(productProperties.weight)},
+      {key: "Height", value1: Number(productProperties.height).toFixed(2) + " in",
+        value2: inchesToMm(productProperties.height)},
+      {key: "Width", value1: Number(productProperties.width).toFixed(2) + " in",
+        value2: inchesToMm(productProperties.width)},
+      {key: "Depth", value1: Number(productProperties.depth).toFixed(2) + " in",
+        value2: inchesToMm(productProperties.depth)}
+    ];
 }
 
 function prepCart(cart) {
@@ -78,7 +70,6 @@ window.app = new Vue({
       username: "carl@phos.net", // TEMP: This is here for convenience, remove it later.
       password: "statictgc" // TEMP: This is here for convenience, remove it later.
     },
-    priceTableItems: [],
     session: wing.object({
       with_credentials: false,
       create_api: URI_prefix + "/api/session",
@@ -101,13 +92,18 @@ window.app = new Vue({
         api_key_id: StaticTGC_api_key_id
       }
     }),
-    product: productObj,
-    vueProduct: wing.object({
-      fetch_api: URI_prefix + "/api/part/" + partID,
-      with_credentials: false,
-      on_fetch: function() {
-        // TODO: Maybe this is the right time to update those product info tables. Duh.
-      }
+    product: wing.object({
+        vitalsTableItems: null,
+        priceTableItems: null,
+        fetch_api: URI_prefix + "/api/part/" + partID,
+        with_credentials: false,
+        on_fetch: function() {
+            // QUESTION: Isn't there some better way to reference this wing object here, i.e. "this"?
+            window.app.$data.product.vitalsTableItems =
+                getVitalsTableItems(window.app.$data.product.properties);
+            window.app.$data.product.priceTableItems =
+                getPriceTableItems(window.app.$data.product.properties);
+        }
     }),
     cart: wing.object({
       with_credentials: false,
@@ -184,7 +180,7 @@ window.app = new Vue({
       var self = this;
       // TODO: Use Wing methods to add the item to the cart, instead of brute-forcing it like this.
       // For now, check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
-      self.cart.call('POST', URI_prefix + '/api/cart//sku/' + this.vueProduct.properties.sku_id, {quantity : 1},
+      self.cart.call('POST', URI_prefix + '/api/cart//sku/' + this.product.properties.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
         }
@@ -192,7 +188,7 @@ window.app = new Vue({
     }
   },
   mounted() {
-    this.vueProduct.fetch();
+    this.product.fetch();
 
     if (localStorage.getItem("tgc_session_id")) {
       this.session.fetch();

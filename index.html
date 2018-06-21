@@ -28,19 +28,19 @@
       <b-row>
         <b-col>
           <div id="product">
-            <h1>{{ vueProduct.properties.name }}</h1>
+            <h1>{{ product.properties.name }}</h1>
             <b-container>
               <b-row>
                 <b-col>
                   <b-container>
-                    <b-img :src="'http:' + vueProduct.properties.preview_uri" :alt="'Photo of ' + vueProduct.properties.name" fluid />
+                    <b-img :src="'http:' + product.properties.preview_uri" :alt="'Photo of ' + product.properties.name" fluid />
                   </b-container>
-                  <p>{{ vueProduct.properties.description }}</p>
+                  <p>{{ product.properties.description }}</p>
                   <!-- Youtube URLs must be in this "/embed/" format - see https://stackoverflow.com/questions/9934944 -->
                   <!-- QUESTION: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too.
                   <b-embed type="iframe"
                            aspect="16by9"
-                           :src="'https://www.youtube.com/embed/' + vueProduct.properties.youtube_video_id"
+                           :src="'https://www.youtube.com/embed/' + product.properties.youtube_video_id"
                            allowfullscreen
                   ></b-embed>
                   -->
@@ -52,7 +52,7 @@
                     be ordered, which could in turn affect the subtotal price. -->
                     <b-button variant="primary" @click="buyClick">
                       <span class="fas fa-cart-plus"></span>
-                      Buy for {{ "$" + Number(vueProduct.properties.price).toFixed(2) }}
+                      Buy for {{ "$" + Number(product.properties.price).toFixed(2) }}
                     </b-button>
                     <!-- QUESTION: How do I insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text property? -->
                     <!-- IDEA: Make this dropdown do something useful. -->
@@ -83,8 +83,8 @@
                     </b-table>
                   </template>
                   <div>
-                    <p>Last Price Change: {{ vueProduct.properties.last_price_change === undefined ?
-                      "" : vueProduct.properties.last_price_change.split(" ")[0] }}</p>
+                    <p>Last Price Change: {{ product.properties.last_price_change === undefined ?
+                      "" : product.properties.last_price_change.split(" ")[0] }}</p>
                   </div>
                 </b-col>
               </b-row>
