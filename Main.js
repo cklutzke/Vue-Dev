@@ -1,8 +1,8 @@
 
 // QUESTION: Is this the right URI to use for production?
 const URI_prefix = "https://www.thegamecrafter.com";
-
 const StaticTGC_api_key_id = "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D";
+const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
 
 function ouncesToGrams(ounces) {
   // Returns a string in the format "#.## g" or an empty string.
@@ -21,8 +21,6 @@ function inchesToMm(inches) {
     return (Number(inches) * 25.4).toFixed(2) + " mm";
   }
 }
-
-const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
 
 function getPriceTableItems(productProperties) {
     console.log("getPriceTableItems");

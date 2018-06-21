@@ -17,7 +17,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
   <!-- IDEA: Set the favicon. -->
-  <!-- QUESTION: How do I upddate this based on the displayed product? Probably requires looking into Vue Router. See https://router.vuejs.org -->
+  <!-- TODO: Start looking into https://router.vuejs.org to do things like update the page title. -->
   <title>BGC Proto 1</title>
 
 </head>
@@ -26,7 +26,8 @@
   <div id="app">
     <b-container>
       <b-row>
-        <b-col>
+        <!-- TODO: Set this column to 2/3 width on desktop but full width on phone. -->
+        <b-col cols="8">
           <div id="product">
             <h1>{{ product.properties.name }}</h1>
             <b-container>
@@ -91,7 +92,7 @@
             </b-container>
           </div>
         </b-col>
-        <b-col cols="3">
+        <b-col>
           <div id="login">
             <b-form @submit="onLoginSubmit" @reset="onLoginReset" v-if="login.show">
               <h1>Log In</h1>
