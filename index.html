@@ -6,8 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-  <!-- TODO: Before actual distribution, include these references via webpack rather than reference. -->
-
+  <!-- TEMP: Before actual distribution, include these references via webpack rather than reference. -->
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap@4.0.0/dist/css/bootstrap.min.css">
   <link type="text/css" rel="stylesheet" href="https://unpkg.com/bootstrap-vue@2.0.0-rc.2/dist/bootstrap-vue.min.css">
   <link type="text/css" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/noty@3.2.0-beta/lib/noty.css">
@@ -17,8 +16,8 @@
   <link type="text/css" rel="stylesheet" href="tgc6/css/main.css">
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
-  <!-- TODO: Set the favicon. -->
-  <!-- TODO: Upddate this based on the displayed product. Probably requires looking into Vue Router. -->
+  <!-- IDEA: Set the favicon. -->
+  <!-- QUESTION: How do I upddate this based on the displayed product? Probably requires looking into Vue Router. See https://router.vuejs.org -->
   <title>BGC Proto 1</title>
 
 </head>
@@ -38,7 +37,7 @@
                   </b-container>
                   <p>{{ vueProduct.properties.description }}</p>
                   <!-- Youtube URLs must be in this "/embed/" format - see https://stackoverflow.com/questions/9934944 -->
-                  <!-- TODO: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too.
+                  <!-- QUESTION: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too.
                   <b-embed type="iframe"
                            aspect="16by9"
                            :src="'https://www.youtube.com/embed/' + vueProduct.properties.youtube_video_id"
@@ -48,15 +47,15 @@
                 </b-col>
                 <b-col>
                   <b-button-group>
-                    <!-- TODO: Any product like this that can be purchased in bulk
+                    <!-- IDEA: Any product like this that can be purchased in bulk
                     should probably have controls to select the quantity to
                     be ordered, which could in turn affect the subtotal price. -->
                     <b-button variant="primary" @click="buyClick">
                       <span class="fas fa-cart-plus"></span>
                       Buy for {{ "$" + Number(vueProduct.properties.price).toFixed(2) }}
                     </b-button>
-                    <!-- TODO: Insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text property. -->
-                    <!-- TODO: Make this dropdown do something useful. -->
+                    <!-- QUESTION: How do I insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text property? -->
+                    <!-- IDEA: Make this dropdown do something useful. -->
                     <b-dropdown text="Add to Wish List">
                       <b-dropdown-item>
                         New wish list
@@ -112,7 +111,7 @@
             </b-form>
           </div>
           <div id="sessionData">
-            <!-- TODO: Display this information more appropriately, if at all. -->
+            <!-- TEMP: Display this information more appropriately, if at all. -->
             <h1>Session Info</h1>
             <p>Session ID: {{ session.properties.id }}</p>
             <p>User ID: {{ session.properties.user_id }}</p>
@@ -160,7 +159,7 @@
     </b-container>
   </div>
 
-  <!-- TODO: Before distribution, make sure the Vue reference is to the prod version instead of the dev version, for better performance. -->
+  <!-- TEMP: Before distribution, make sure the Vue reference is to the prod version instead of the dev version, for better performance. -->
   <script src="https://unpkg.com/babel-polyfill@6.26.0/dist/polyfill.min.js"></script><!-- IE 11 -->
   <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
   <script src="https://unpkg.com/bootstrap-vue@2.0.0-rc.2/dist/bootstrap-vue.js"></script>
@@ -169,7 +168,7 @@
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
   <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
   <script src="wing/wing.vue.js?v=1"></script>
-  <!-- TODO: Should I add "?v=1" to the end of my JavaScript filename here? -->
+  <!-- QUESTION: Should I add "?v=1" to the end of my JavaScript filename here? -->
   <script src="Main.js"></script>
 
 </body>

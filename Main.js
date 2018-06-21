@@ -1,6 +1,8 @@
 
-// TODO: Is this the right URI to use for production?
+// QUESTION: Is this the right URI to use for production?
 const URI_prefix = "https://www.thegamecrafter.com";
+
+const StaticTGC_api_key_id = "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D";
 
 function ouncesToGrams(ounces) {
   // Returns a string in the format "#.## g" or an empty string.
@@ -20,9 +22,8 @@ function inchesToMm(inches) {
   }
 }
 
-// TODO: Get all product data from the server and remove the productData constant.
-// TODO: Add Color, Category, and Material. With links to other matching parts.
-// TODO: Provide dropdowns to select different colors, materials, and sizes.
+// IDEA: Add Color, Category, and Material. With links to other matching parts.
+// IDEA: Provide dropdowns to select different colors, materials, and sizes.
 const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
 const productData = {
   "depth" : 0.4,
@@ -36,7 +37,7 @@ const productData = {
   "width" : 0.61,
 }
 
-// TODO: Can I generate these tables in response to the product's on_fetch event?
+// TEMP: Generate these tables from server data in response to the product's on_fetch event?
 let productObj = {
     vitalsTableItems: [
       {key: "Quantity in Stock", value1: productData.quantity, value2: ""},
@@ -57,13 +58,25 @@ let productObj = {
     ]
 }
 
+function prepCart(cart) {
+  if (localStorage.getItem("tgc_cart_id")) {
+    cart.fetch();
+  } else {
+    cart.create();
+  }
+}
+
+function displayCart(cart) {
+    // TODO: Make this work somehow.
+}
+
 window.app = new Vue({
   el: "#app",
   data: {
     login: {
       show: true,
-      username: "carl@phos.net", // TODO: Remove this later.
-      password: ""
+      username: "carl@phos.net", // TEMP: This is here for convenience, remove it later.
+      password: "statictgc" // TEMP: This is here for convenience, remove it later.
     },
     priceTableItems: [],
     session: wing.object({
@@ -72,18 +85,20 @@ window.app = new Vue({
       on_create: function(properties) {
         window.app.$data.login.username = "";
         window.app.$data.login.password = "";
+        localStorage.setItem("tgc_session_id", window.app.$data.session.properties.id);
         window.app.$data.login.show = false;
-        localStorage.setItem("tgc_session_id", window.app.$data.session.properties.id)
+        prepCart(window.app.$data.cart);
       },
       fetch_api: URI_prefix + "/api/session/" + localStorage.tgc_session_id,
       on_fetch: function(properties) {
-        window.app.$data.login.show = false;
+          window.app.$data.login.show = false;
+          prepCart(window.app.$data.cart);
       },
       on_delete: function(properties) {
       },
       params: {
         "_include_related_objects": ["user"],
-        api_key_id: "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D"
+        api_key_id: StaticTGC_api_key_id
       }
     }),
     product: productObj,
@@ -91,12 +106,24 @@ window.app = new Vue({
       fetch_api: URI_prefix + "/api/part/" + partID,
       with_credentials: false,
       on_fetch: function() {
-        console.log("Product data has been fetched.");
+        // TODO: Maybe this is the right time to update those product info tables. Duh.
       }
     }),
     cart: wing.object({
-      fetch_api : URI_prefix + '/api/cart/',
-      with_credentials: false
+      with_credentials: false,
+      create_api: URI_prefix + "/api/cart",
+      on_create: function(properties) {
+        localStorage.setItem("tgc_cart_id", window.app.$data.cart.properties.id);
+        displayCart(this);
+      },
+      fetch_api : URI_prefix + "/api/cart/" + localStorage.tgc_cart_id,
+      on_fetch: function(properties) {
+         displayCart(this);
+      },
+      params: {
+        // QUESTION: Get related objects?
+        api_key_id: StaticTGC_api_key_id
+      }
     })
     /*,
     cartitems : wing.object_list({
@@ -111,7 +138,7 @@ window.app = new Vue({
     */
   },
   computed: {
-    // TODO: Fetch isn't getting related data for the session, so this data is missing.
+    // BUG: Fetch isn't getting related data for the session, so this data is missing.
     userName: function() {
       if (this.session.properties.user === undefined) {
         return "Not logged in.";
@@ -139,29 +166,27 @@ window.app = new Vue({
     logOutClick: function(event) {
       var self = this;
       /*
-      // TODO: A call to https://www.thegamecrafter.com/api/session/[session ID] shows the code below doesn't work.
+      // BUG: A call to https://www.thegamecrafter.com/api/session/[session ID] shows the code below doesn't work.
       // JT says this is an error in his code, he'll fix it later.
       self.session.delete({});
       */
       // The kludge code below does log me out.
       self.session.call('DELETE', URI_prefix + '/api/session/' + this.session.properties.id, {},
         { on_success : function(properties) {
-          // TODO: When delete() works, the code below should be in session.on_delete().
+          // TEMP: When delete() works, the code below should be in session.on_delete().
           window.app.$data.login.show = true;
-          // TODO: Clear the cart ID from localStorage?
+          // QUESTION: Should I clear the cart ID from localStorage here?
           localStorage.removeItem("tgc_session_id");
         }
       });
     },
     buyClick: function(event) {
       var self = this;
-      // TODO 1: Show the contents of the cart.
+      // TODO: Use Wing methods to add the item to the cart, instead of brute-forcing it like this.
       // For now, check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
       self.cart.call('POST', URI_prefix + '/api/cart//sku/' + this.vueProduct.properties.sku_id, {quantity : 1},
         { on_success : function(properties) {
           wing.success('Added!');
-          // TODO 2: Add the cart ID to localStorage
-          // self.cartitems.reset()._all();
         }
       });
     }
@@ -169,16 +194,10 @@ window.app = new Vue({
   mounted() {
     this.vueProduct.fetch();
 
-    console.log(localStorage.getItem("tgc_session_id"));
     if (localStorage.getItem("tgc_session_id")) {
-      this.session.fetch({});
+      this.session.fetch();
     } else {
       this.login.show;
     }
-
-    // TODO: If localStorage has a cart ID...
-      // Fetch and display the cart info
-    // else show the cart as empty
-
   }
 })
