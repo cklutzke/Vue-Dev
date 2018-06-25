@@ -71,7 +71,7 @@ window.app = new Vue({
             password: "statictgc" // TEMP: This is here for convenience, remove it later.
         },
         product: wing.object({
-            vitalsTableItems: null,
+            vitalsTableItems: null, // TODO: Make these computed properties instead.
             priceTableItems: null,
             fetch_api: "/api/part/" + partID,
             with_credentials: false,
@@ -189,7 +189,6 @@ window.app = new Vue({
     mounted() {
         this.product.fetch();
 
-        // QUESTION: Should this look at our data objects instead of localStorage?
         if (localStorage.getItem("tgc_session_id")) {
             this.session.fetch();
         } else {

@@ -23,71 +23,63 @@
 <body>
 
   <div id="app">
-    <h1>{{ product.properties.name }}</h1>
     <b-container>
       <b-row>
-        <!-- TODO: Just split the display in three columns, don't try to group the product columns together. -->
-        <b-col cols = "8">
-          <div id="product">
+        <b-col>
+            <h1>{{ product.properties.name }}</h1>
             <b-container>
-              <b-row>
-                <b-col>
-                  <b-container>
-                    <b-img :src="'http:' + product.properties.preview_uri" :alt="'Photo of ' + product.properties.name" fluid />
-                  </b-container>
-                  <p>{{ product.properties.description }}</p>
-                  <!-- Youtube URLs must be in this "/embed/" format - see https://stackoverflow.com/questions/9934944 -->
-                  <!-- QUESTION: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too. -->
-                  <b-embed type="iframe"
-                           aspect="16by9"
-                           :src="'https://www.youtube.com/embed/' + product.properties.youtube_video_id"
-                           allowfullscreen
-                  ></b-embed>
-                </b-col>
-                <b-col>
-                  <b-button-group>
-                    <!-- IDEA: Any product like this that can be purchased in bulk
-                    should probably have controls to select the quantity to
-                    be ordered, which could in turn affect the subtotal price. -->
-                    <b-button variant="primary" @click="buyClick">
-                      <span class="fas fa-cart-plus"></span>
-                      Buy for {{ "$" + Number(product.properties.price).toFixed(2) }}
-                    </b-button>
-                    <!-- QUESTION: How do I insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text property? -->
-                    <!-- IDEA: Make this dropdown do something useful. -->
-                    <b-dropdown text="Add to Wish List" :disabled = "true">
-                      <b-dropdown-item>
-                        New wish list
-                      </b-dropdown-item>
-                    </b-dropdown>
-                  </b-button-group>
-                  <div></div>
-                  <template>
-                    <b-table
-                      :items="product.vitalsTableItems" <!-- TODO: This should be a computed property on the Vue object instead. -->
-                      :fields='[
-                        {key: "key", label: "Vitals"},
-                        {key: "value1", label: ""},
-                        {key: "value2", label: ""}
-                      ]'>
-                    </b-table>
-                  </template>
-                  <template>
-                    <b-table
-                      :items="product.priceTableItems"
-                      :fields='[
-                        {key: "range", label: "Bulk Pricing"},
-                        {key: "ea", label: ""}
-                      ]'>
-                    </b-table>
-                  </template>
-                  <div>
-                    <p>Last Price Change: {{ product.properties.last_price_change === undefined ?
-                      "" : product.properties.last_price_change.split(" ")[0] }}</p>
-                  </div>
-                </b-col>
-              </b-row>
+                <b-img :src="'http:' + product.properties.preview_uri" :alt="'Photo of ' + product.properties.name" fluid />
             </b-container>
+            <p>{{ product.properties.description }}</p>
+            <!-- Youtube URLs must be in this "/embed/" format - see https://stackoverflow.com/questions/9934944 -->
+            <!-- QUESTION: What is with the violations this video is causing? Happens in an HTML5 iframe too.
+            <b-embed type="iframe"
+                   aspect="16by9"
+                   :src="'https://www.youtube.com/embed/' + product.properties.youtube_video_id"
+                   allowfullscreen
+            ></b-embed>
+            -->
+        </b-col>
+        <b-col>
+          <b-button-group>
+            <!-- IDEA: Any product like this that can be purchased in bulk
+            should probably have controls to select the quantity to
+            be ordered, which could in turn affect the subtotal price. -->
+            <b-button variant="primary" @click="buyClick">
+              <span class="fas fa-cart-plus"></span>
+              Buy for {{ "$" + Number(product.properties.price).toFixed(2) }}
+            </b-button>
+            <!-- QUESTION: How do I insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text property? -->
+            <!-- IDEA: Make this dropdown do something useful. -->
+            <b-dropdown text="Add to Wish List" :disabled = "true">
+              <b-dropdown-item>
+                New wish list
+              </b-dropdown-item>
+            </b-dropdown>
+          </b-button-group>
+          <div></div>
+          <template>
+            <b-table
+              :items="product.vitalsTableItems"
+              :fields='[
+                {key: "key", label: "Vitals"},
+                {key: "value1", label: ""},
+                {key: "value2", label: ""}
+              ]'>
+            </b-table>
+          </template>
+          <template>
+            <b-table
+              :items="product.priceTableItems"
+              :fields='[
+                {key: "range", label: "Bulk Pricing"},
+                {key: "ea", label: ""}
+              ]'>
+            </b-table>
+          </template>
+          <div>
+            <p>Last Price Change: {{ product.properties.last_price_change === undefined ?
+              "" : product.properties.last_price_change.split(" ")[0] }}</p>
           </div>
         </b-col>
         <b-col>
@@ -133,7 +125,7 @@
                       </tr>
                       </thead>
                       <tbody>
-                          <!-- TODO: See if I can get this to load and display cart items without generating errors. -->
+                          <!-- TODO: Display this using a Bootstrap-Vue table. -->
                           <tr v-for="item in cart.properties.items">
                               <td>{{ item.name }}</td>
                               <td>{{ item.price_each }}</td>
