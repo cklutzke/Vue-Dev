@@ -1,6 +1,5 @@
 
-// QUESTION: Is this the right URI to use for production?
-const URI_prefix = "https://www.thegamecrafter.com";
+wing.base_uri = "https://www.thegamecrafter.com";
 const StaticTGC_api_key_id = "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D";
 const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
 
@@ -67,15 +66,14 @@ function displayCart(cart) {
 window.app = new Vue({
     el: "#app",
     data: {
-        login: {
-            show: true,
+        login: { // TODO: Get rid of this object. Put these values on the session object instead.
             username: "carl@phos.net", // TEMP: This is here for convenience, remove it later.
             password: "statictgc" // TEMP: This is here for convenience, remove it later.
         },
         product: wing.object({
             vitalsTableItems: null,
             priceTableItems: null,
-            fetch_api: URI_prefix + "/api/part/" + partID,
+            fetch_api: "/api/part/" + partID,
             with_credentials: false,
             on_fetch: function() {
                 // QUESTION: Isn't there some better way to reference this wing object here, i.e. "this"?
@@ -87,15 +85,16 @@ window.app = new Vue({
         }),
         session: wing.object({
             with_credentials: false,
-            create_api: URI_prefix + "/api/session",
+            create_api: "/api/session",
             on_create: function(properties) {
                 window.app.$data.login.username = "";
                 window.app.$data.login.password = "";
                 localStorage.setItem("tgc_session_id", window.app.$data.session.properties.id);
-                window.app.$data.login.show = false;
+
+                // TODO: Don't do this until they add something.
                 prepCart(window.app.$data.cart);
             },
-            fetch_api: URI_prefix + "/api/session/" + localStorage.tgc_session_id,
+            fetch_api: "/api/session/" + localStorage.tgc_session_id,
             on_fetch: function(properties) {
                 window.app.$data.login.show = false;
                 prepCart(window.app.$data.cart);
@@ -109,12 +108,12 @@ window.app = new Vue({
         }),
         cart: wing.object({
             with_credentials: false,
-            create_api: URI_prefix + "/api/cart",
+            create_api: "/api/cart",
             on_create: function(properties) {
                 localStorage.setItem("tgc_cart_id", window.app.$data.cart.properties.id);
                 displayCart(this);
             },
-            fetch_api : URI_prefix + "/api/cart/" + localStorage.tgc_cart_id,
+            fetch_api : "/api/cart/" + localStorage.tgc_cart_id,
             on_fetch: function(properties) {
                 // BUG: Fetch (GET) isn't returning related objects, so this probably won't work.
                 displayCart(this);
@@ -157,36 +156,34 @@ window.app = new Vue({
         logOutClick: function(event) {
             var self = this;
 
-            // TODO: Delete the cart before deleting the session.
-            // self.cart.delete({});
+            // Don't delete the cart ever.
 
-            /*
+
             // BUG: A call to https://www.thegamecrafter.com/api/session/[session ID] shows the code below doesn't work.
             // JT says this is an error in his code, he'll fix it later.
-            self.session.delete({});
-            */
+            self.session.delete();
+
+            /*
             // The kludge code below does log me out.
-            self.session.call('DELETE', URI_prefix + '/api/session/' + this.session.properties.id, {},
+            self.session.call('DELETE', '/api/session/' + this.session.properties.id, {},
                 { on_success : function(properties) {
                     // TEMP: When delete() works, the code below should be in session.on_delete().
                     window.app.$data.login.show = true;
-                    localStorage.removeItem("tgc_cart_id");
                     localStorage.removeItem("tgc_session_id");
                 }
             });
+            */
         },
         buyClick: function(event) {
-            if (this.loggedOut) {
-                wing.error("You must log in first.");
-            } else {
-                var self = this;
-                self.cart.call('POST', URI_prefix + "/api/cart/" + localStorage.tgc_cart_id +
-                    "/sku/" + this.product.properties.sku_id, {quantity : 1},
-                    { on_success : function(properties) {
-                        wing.success('Added!');
-                    }
-                });
-            }
+            // TODO: Create a cart if it doesn't already exist.
+
+            var self = this;
+            self.cart.call('POST', "/api/cart/" + localStorage.tgc_cart_id +
+                "/sku/" + this.product.properties.sku_id, {quantity : 1},
+                { on_success : function(properties) {
+                    wing.success('Added!');
+                }
+            });
         }
     },
     mounted() {

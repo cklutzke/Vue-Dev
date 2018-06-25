@@ -23,12 +23,12 @@
 <body>
 
   <div id="app">
+    <h1>{{ product.properties.name }}</h1>
     <b-container>
       <b-row>
-        <!-- TODO: Set this column to 2/3 width on desktop but full width on phone. -->
-        <b-col cols="8">
+        <!-- TODO: Just split the display in three columns, don't try to group the product columns together. -->
+        <b-col cols = "8">
           <div id="product">
-            <h1>{{ product.properties.name }}</h1>
             <b-container>
               <b-row>
                 <b-col>
@@ -37,20 +37,19 @@
                   </b-container>
                   <p>{{ product.properties.description }}</p>
                   <!-- Youtube URLs must be in this "/embed/" format - see https://stackoverflow.com/questions/9934944 -->
-                  <!-- QUESTION: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too.
+                  <!-- QUESTION: What is with the errors and violations this video is causing? Happens in an HTML5 iframe too. -->
                   <b-embed type="iframe"
                            aspect="16by9"
                            :src="'https://www.youtube.com/embed/' + product.properties.youtube_video_id"
                            allowfullscreen
                   ></b-embed>
-                  -->
                 </b-col>
                 <b-col>
                   <b-button-group>
                     <!-- IDEA: Any product like this that can be purchased in bulk
                     should probably have controls to select the quantity to
                     be ordered, which could in turn affect the subtotal price. -->
-                    <b-button variant="primary" @click="buyClick" :disabled = "loggedOut">
+                    <b-button variant="primary" @click="buyClick">
                       <span class="fas fa-cart-plus"></span>
                       Buy for {{ "$" + Number(product.properties.price).toFixed(2) }}
                     </b-button>
@@ -65,7 +64,7 @@
                   <div></div>
                   <template>
                     <b-table
-                      :items="product.vitalsTableItems"
+                      :items="product.vitalsTableItems" <!-- TODO: This should be a computed property on the Vue object instead. -->
                       :fields='[
                         {key: "key", label: "Vitals"},
                         {key: "value1", label: ""},
@@ -93,7 +92,7 @@
         </b-col>
         <b-col>
           <div id="login">
-            <b-form @submit="onLoginSubmit" @reset="onLoginReset" v-if="login.show">
+            <b-form @submit="onLoginSubmit" @reset="onLoginReset" v-if="session.properties.id == null">
               <h1>Log In</h1>
               <b-form-group id="userNameInputGroup" label="User Name:" label-for="userNameInput">
                 <b-form-input id="userNameInput" type="text" v-model="login.username"
@@ -157,8 +156,8 @@
   <script src="https://cdn.jsdelivr.net/npm/noty@3.2.0-beta/lib/noty.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
   <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
-  <script src="wing/wing.vue.js?v=1"></script>
-  <!-- QUESTION: Should I add "?v=1" to the end of my JavaScript filename here? -->
+  <script src="https://cdn.jsdelivr.net/npm/qs@6.5.2/dist/qs.js"></script>
+  <script src="wing/wing.vue.js"></script>
   <script src="Main.js"></script>
 
 </body>

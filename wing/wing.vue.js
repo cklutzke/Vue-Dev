@@ -10,6 +10,9 @@ axios.defaults.headers.get['If-Modified-Since'] = 'Mon, 26 Jul 1997 05:00:00 GMT
 //more cache control
 axios.defaults.headers.get['Cache-Control'] = 'no-cache';
 axios.defaults.headers.get['Pragma'] = 'no-cache';
+axios.defaults.paramsSerializer = function(params) {
+    return Qs.stringify(params, {arrayFormat: 'repeat'});
+};
 axios.interceptors.request.use(function (config) {
     wing.throbber.working();
     return config;
@@ -167,7 +170,6 @@ Vue.component('wing-select', {
   },
 });
 
-
 /*
  * A component to generate select lists from wing options.
  */
@@ -207,6 +209,21 @@ Vue.component('confirmation-toggle', {
  */
 
 const wing = {
+
+    /*
+     * base URI when you're working against a server that is not on your domain
+     */
+
+     base_uri : null,
+
+     format_base_uri : function(uri_suffix) {
+         if (wing.base_uri == null) {
+             return uri_suffix;
+         }
+         else {
+             return wing.base_uri + uri_suffix;
+         }
+     },
 
     /*
     * Manages the ajax progress bar
@@ -269,7 +286,7 @@ const wing = {
             const self = this;
             const promise = axios({
                 method:'get',
-                url: (typeof self.properties !== 'undefined' && typeof self.properties._relationships !== 'undefined' && self.properties._relationships.self) || self.fetch_api,
+                url: wing.format_base_uri((typeof self.properties !== 'undefined' && typeof self.properties._relationships !== 'undefined' && self.properties._relationships.self) || self.fetch_api),
                 params : self.params,
                 withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
             });
@@ -303,7 +320,7 @@ const wing = {
             const params = _.extend({}, self.params, properties);
             const promise = axios({
                 method:'post',
-                url: self.create_api,
+                url: wing.format_base_uri(self.create_api),
                 data : params,
                 withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
             });
@@ -348,7 +365,7 @@ const wing = {
             const params = _.extend({}, self.params, properties);
             const config = {
                 method: method.toLowerCase(),
-                url: uri,
+                url: wing.format_base_uri(uri),
                 params : params,
                 withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
             };
@@ -388,7 +405,7 @@ const wing = {
             const params = _.extend({}, self.params, properties);
             const promise = axios({
                 method: 'put',
-                url: self.properties._relationships.self,
+                url: wing.format_base_uri(self.properties._relationships.self),
                 data : params,
                 withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
             });
@@ -418,6 +435,9 @@ const wing = {
         delete : function(options) {
             const self = this;
             const object = self.properties;
+            if (_.isEmpty(object._relationships.self)) {
+                console.error('You need to specify an API URL to use the wing.delete method.');
+            }
             let message = 'Are you sure?';
             if ('name' in object) {
                 message = 'Are you sure you want to delete ' + object.name + '?';
@@ -425,7 +445,7 @@ const wing = {
             if ((typeof options !== 'undefined' && typeof options.skip_confirm !== 'undefined' && options.skip_confirm == true) ||  wing.confirmations.disabled() || confirm(message)) {
                 const promise = axios({
                     method: 'delete',
-                    url: object._relationships.self,
+                    url: wing.format_base_uri(object._relationships.self),
                     params : self.params,
                     withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
                 });
@@ -443,10 +463,10 @@ const wing = {
                     console.dir(error);
                     const data = error.response.data;
                     if (typeof options !== 'undefined' && typeof options.on_error !== 'undefined') {
-                        options.on_error(data.result);
+                        options.on_error(data.error);
                     }
                     if (typeof behavior.on_error !== 'undefined') {
-                        behavior.on_error(data.result);
+                        behavior.on_error(data.error);
                     }
                 });
                 return promise;
@@ -528,7 +548,7 @@ const wing = {
             const params = _.extend({}, pagination, self.params);
             const promise = axios({
                 method: 'get',
-                url: self.list_api,
+                url: wing.format_base_uri(self.list_api),
                 params : params,
                 withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
             });
@@ -578,7 +598,7 @@ const wing = {
             }
             const promise = axios({
                 method: 'get',
-                url: self.list_api,
+                url: wing.format_base_uri(self.list_api),
                 params : params,
                 withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
             });
@@ -623,7 +643,7 @@ const wing = {
             const params = _.extend({}, params, self.params, properties);
             const promise = axios({
                 method: method.toLowerCase(),
-                url: uri,
+                url: wing.format_base_uri(uri),
                 params : params,
                 withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
             });
@@ -657,7 +677,7 @@ const wing = {
             const self = this;
             const promise = axios({
                 method: 'get',
-                url: self.options_api(),
+                url: wing.format_base_uri(self.options_api()),
                 withCredentials : behavior.with_credentials != null ? behavior.with_credentials : true,
             });
             promise.then(function (response) {
@@ -843,6 +863,37 @@ const wing = {
          if (!results) return null;
          if (!results[2]) return '';
          return decodeURIComponent(results[2].replace(/\+/g, " "));
+     },
+
+     firebase(user_id) {
+         if (typeof firebase === 'undefined') {
+             wing.error('Firebase client not installed');
+             return null;
+         }
+         else {
+             const promise = axios.get('/api/user/'+user_id+'/firebase-jwt').
+             then(function(response) {
+                 const config = response.data.result;
+                 firebase.initializeApp({
+                     databaseURL : 'https://'+config.database+'.firebaseio.com',
+                     apiKey : config.api_key,
+                     authDomain : config.id+'.firebaseapp.com',
+                 });
+                 firebase.auth().signInWithCustomToken(config.jwt).catch(function(error) {
+                     console.log("Firebase login failed!", error);
+                 });
+                 firebase.database().ref('/status/'+user_id).on('child_added', function(snapshot) {
+                     const message = snapshot.val();
+                     if (_.includes(['warn','info','error','success'], message.type)) {
+                         wing[message.type](message.message);
+                         setTimeout(function(){ snapshot.ref.remove(); }, 1000);
+                     }
+                     else {
+                         console.dir(message);
+                     }
+                 });
+             });
+         }
      },
 
 };
