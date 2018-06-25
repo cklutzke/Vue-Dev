@@ -156,6 +156,10 @@ window.app = new Vue({
         },
         logOutClick: function(event) {
             var self = this;
+
+            // TODO: Delete the cart before deleting the session.
+            // self.cart.delete({});
+
             /*
             // BUG: A call to https://www.thegamecrafter.com/api/session/[session ID] shows the code below doesn't work.
             // JT says this is an error in his code, he'll fix it later.
@@ -166,23 +170,23 @@ window.app = new Vue({
                 { on_success : function(properties) {
                     // TEMP: When delete() works, the code below should be in session.on_delete().
                     window.app.$data.login.show = true;
-                    // TODO: Delete the cart.
                     localStorage.removeItem("tgc_cart_id");
                     localStorage.removeItem("tgc_session_id");
                 }
             });
         },
         buyClick: function(event) {
-            // TODO: Prevent this action if there's no session ID.
-
-            // For now, check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
-            var self = this;
-            self.cart.call('POST', URI_prefix + "/api/cart/" + localStorage.tgc_cart_id +
-                "/sku/" + this.product.properties.sku_id, {quantity : 1},
-                { on_success : function(properties) {
-                    wing.success('Added!');
-                }
-            });
+            if (this.loggedOut) {
+                wing.error("You must log in first.");
+            } else {
+                var self = this;
+                self.cart.call('POST', URI_prefix + "/api/cart/" + localStorage.tgc_cart_id +
+                    "/sku/" + this.product.properties.sku_id, {quantity : 1},
+                    { on_success : function(properties) {
+                        wing.success('Added!');
+                    }
+                });
+            }
         }
     },
     mounted() {
