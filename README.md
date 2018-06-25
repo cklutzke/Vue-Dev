@@ -7,9 +7,6 @@ TO RUN THIS APPLICATION:
 
 -------------------------------------------
 
-TODO: Get the Buy button to add a meeple to my cart.
-  Check the cart at [User Name] -> Account Overview -> Shopping -> Carts to confirm.
-
 TODO: Figure out how to make the Vue Router work.
 
 TODO: Bundle Bootstrap and single-file components using webpack instead of

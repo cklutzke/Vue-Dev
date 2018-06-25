@@ -133,6 +133,9 @@ window.app = new Vue({
             } else {
                 return this.session.properties.user.display_name;
             }
+        },
+        loggedOut: function() {
+            return (this.session.properties.id === undefined);
         }
     },
     methods: {
@@ -170,6 +173,8 @@ window.app = new Vue({
             });
         },
         buyClick: function(event) {
+            // TODO: Prevent this action if there's no session ID.
+
             // For now, check https://www.thegamecrafter.com/api/cart/[cart.properties.id]/items to see if items were successfully added.
             var self = this;
             self.cart.call('POST', URI_prefix + "/api/cart/" + localStorage.tgc_cart_id +
@@ -183,6 +188,7 @@ window.app = new Vue({
     mounted() {
         this.product.fetch();
 
+        // QUESTION: Should this look at our data objects instead of localStorage?
         if (localStorage.getItem("tgc_session_id")) {
             this.session.fetch();
         } else {

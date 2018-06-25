@@ -17,7 +17,6 @@
   <link rel="stylesheet" type="text/css" href="stylesheet.css">
 
   <!-- IDEA: Set the favicon. -->
-  <!-- TODO: Start looking into https://router.vuejs.org to do things like update the page title. -->
   <title>BGC Proto 1</title>
 
 </head>
@@ -51,13 +50,13 @@
                     <!-- IDEA: Any product like this that can be purchased in bulk
                     should probably have controls to select the quantity to
                     be ordered, which could in turn affect the subtotal price. -->
-                    <b-button variant="primary" @click="buyClick">
+                    <b-button variant="primary" @click="buyClick" :disabled = "loggedOut">
                       <span class="fas fa-cart-plus"></span>
                       Buy for {{ "$" + Number(product.properties.price).toFixed(2) }}
                     </b-button>
                     <!-- QUESTION: How do I insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text property? -->
                     <!-- IDEA: Make this dropdown do something useful. -->
-                    <b-dropdown text="Add to Wish List">
+                    <b-dropdown text="Add to Wish List" :disabled = "true">
                       <b-dropdown-item>
                         New wish list
                       </b-dropdown-item>
