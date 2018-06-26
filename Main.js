@@ -104,16 +104,14 @@ window.app = new Vue({
             this.password = "";
         },
         logOutClick: function(event) {
-            var self = this;
-            self.session.delete();
+            this.session.delete();
         },
         buyClick: function(event) {
             let cartId = localStorage.getItem("tgc_cart_id");
             if (!cartId) {
                 cartId = "";
             }
-            var self = this;
-            self.cart.call('POST', "/api/cart/" + cartId + "/sku/" +
+            this.cart.call('POST', "/api/cart/" + cartId + "/sku/" +
                 this.product.properties.sku_id, {quantity : 1},
                 { on_success : function(properties) {
                     wing.success('Added!');
