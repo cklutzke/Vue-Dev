@@ -27,14 +27,8 @@ window.app = new Vue({
         username: "carl@phos.net", // TEMP: This is here for convenience, remove it later.
         password: "statictgc", // TEMP: This is here for convenience, remove it later.
         product: wing.object({
-            //vitalsTableItems: null,
             fetch_api: "/api/part/" + partID,
             with_credentials: false
-            // on_fetch: function(properties) {
-            //     // QUESTION: Isn't there some better way to reference vitalsTableItems here, i.e. "this"?
-            //     window.app.$data.product.vitalsTableItems =
-            //         getVitalsTableItems(window.app.$data.product.properties);
-            // }
         }),
         session: wing.object({
             with_credentials: false,
