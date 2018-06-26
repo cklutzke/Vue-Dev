@@ -87,12 +87,12 @@
             <b-form @submit="onLoginSubmit" @reset="onLoginReset" v-if="session.properties.id == null">
               <h1>Log In</h1>
               <b-form-group id="userNameInputGroup" label="User Name:" label-for="userNameInput">
-                <b-form-input id="userNameInput" type="text" v-model="login.username"
+                <b-form-input id="userNameInput" type="text" v-model="username"
                   required placeholder="Enter username">
                 </b-form-input>
               </b-form-group>
               <b-form-group id="passwordInputGroup" label="Password:" label-for="passwordInput">
-                <b-form-input id="passwordInput" type="password" v-model="login.password"
+                <b-form-input id="passwordInput" type="password" v-model="password"
                   required placeholder="Enter password">
                 </b-form-input>
               </b-form-group>
@@ -108,12 +108,12 @@
             <p>User ID: {{ session.properties.user_id }}</p>
             <p>User Name: {{ userName }}</p>
             <p>Cart ID: {{ cart.properties.id }}</p>
-            <b-button variant="secondary" @click="logOutClick" v-if="!login.show">
+            <b-button variant="secondary" @click="logOutClick" v-if="session.properties.id != null">
               Log Out
             </b-button>
             <p />
           </div>
-          <div id="cart">
+          <div id="cart" v-if="cart.properties.id != null">
             <h1>Shopping Cart</h1>
               <div class="table-responsive">
                   <table class="table">
