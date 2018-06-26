@@ -60,7 +60,7 @@
           <div></div>
           <template>
             <b-table
-              :items="product.vitalsTableItems"
+              :items="vitalsTableItems"
               :fields='[
                 {key: "key", label: "Vitals"},
                 {key: "value1", label: ""},
@@ -70,7 +70,7 @@
           </template>
           <template>
             <b-table
-              :items="product.priceTableItems"
+              :items="priceTableItems"
               :fields='[
                 {key: "range", label: "Bulk Pricing"},
                 {key: "ea", label: ""}

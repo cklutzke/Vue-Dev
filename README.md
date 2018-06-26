@@ -10,8 +10,6 @@ TO RUN THIS APPLICATION:
 TODO: Create the cart only when the first item is added, whether the user is signed
 in or not. Always restore it when we have a cart ID. Don't ever delete it.
 
-TODO: Create the vitals and price tables as Vue computed properties.
-
 TODO: Display the cart contents using a Bootstrap-Vue table.
 
 TODO: Figure out how to make the Vue Router work.
