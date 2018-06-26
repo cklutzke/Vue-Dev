@@ -46,18 +46,10 @@ window.app = new Vue({
             }
         }),
         cart: wing.object({
+            // We never explicitly create a cart. It's created the first time the
+            // user adds an item, and then we put the ID in localStorage.
             with_credentials: false,
-            create_api: "/api/cart",
-            on_create: function(properties) {
-                console.log("cart on_create(): Stored cart id is " + localStorage.getItem("tgc_cart_id"));
-                console.log("cart on_create(): Created cart's properties.id is " + properties.id);
-                localStorage.setItem("tgc_cart_id", properties.id);
-            },
             fetch_api : "/api/cart/" + localStorage.getItem("tgc_cart_id"),
-            on_fetch: function(properties) {
-                console.log("cart on_fetch(): Stored cart id is " + localStorage.getItem("tgc_cart_id"));
-                console.log("cart on_fetch(): Fetched cart's properties.id is " + properties.id);
-            },
             params: {
                 _include_related_objects: ["items"],
                 api_key_id: StaticTGC_api_key_id
@@ -116,20 +108,18 @@ window.app = new Vue({
             self.session.delete();
         },
         buyClick: function(event) {
-            var self = this;
-            if (!localStorage.getItem("tgc_cart_id")) {
-                console.log("buyClick(): No saved cart ID, creating new cart.");
-                self.cart.create();
+            let cartId = localStorage.getItem("tgc_cart_id");
+            if (!cartId) {
+                cartId = "";
             }
-            console.log("buyClick(): Posting sale to cart.");
-            // QUESTION: How do I ensure the create() completes before the POST below?
-            // Currently this POST gets made with a null cart ID, which causes a new cart to be created.
-            // Is that how I should create the new cart in the first place?
-            self.cart.call('POST', "/api/cart/" + localStorage.getItem("tgc_cart_id") +
-                "/sku/" + this.product.properties.sku_id, {quantity : 1},
+            var self = this;
+            self.cart.call('POST', "/api/cart/" + cartId + "/sku/" +
+                this.product.properties.sku_id, {quantity : 1},
                 { on_success : function(properties) {
-                    console.log("buyClick() on_success(): Item was added to cart " + properties.id);
                     wing.success('Added!');
+                    if (!localStorage.getItem("tgc_cart_id")) {
+                        localStorage.setItem("tgc_cart_id", properties.id);
+                    };
                 }
             });
         }
@@ -142,7 +132,6 @@ window.app = new Vue({
         }
 
         if (localStorage.getItem("tgc_cart_id")) {
-            console.log("mounted(): Fetching cart ID " + localStorage.getItem("tgc_cart_id"));
             this.cart.fetch();
         }
     }
