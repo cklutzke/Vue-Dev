@@ -21,7 +21,7 @@ function inchesToMm(inches) {
     }
 }
 
-window.app = new Vue({
+const app = new Vue({
     el: "#app",
     data: {
         username: "carl@phos.net", // TEMP: This is here for convenience, remove it later.

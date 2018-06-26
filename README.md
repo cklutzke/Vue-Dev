@@ -7,8 +7,6 @@ TO RUN THIS APPLICATION:
 
 -------------------------------------------
 
-TODO: Display the cart contents using a Bootstrap-Vue table.
-
 TODO: Figure out how to make the Vue Router work.
 
 TODO: Bundle Bootstrap and single-file components using webpack instead of
@@ -17,3 +15,5 @@ to learn webpack and https://bootstrap-vue.js.org/docs/reference/starter-templat
 for examples of using it with bootstrap.
   Prereqs to add to TO RUN instructions:
   Install Node.js from << https://nodejs.org/en/ >> to get NPM.
+
+ TODO: Display the cart contents using a Bootstrap-Vue table.
