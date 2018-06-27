@@ -22,16 +22,22 @@ function inchesToMm(inches) {
 }
 
 const PartTemplate = {
-    template: `<div>Selected part ID is {{ $route.params.partId }}</div>`
+    template: `
+        <div>Selected part ID is {{ $route.params.partId }}</div>
+    `,
+    beforeRouteUpdate (to, from, next) {
+        console.log("Path is changing to " + to.params.partId);
+        next();
+    }
 }
 
+// TODO: How do I get product to fetch() based on the new partId?
 const router = new VueRouter({
     routes: [
         { path: "/part/:partId", component: PartTemplate }
     ]
 })
 
-// QUESTION: Does Vue Router require me to invoke .$mount("#app") here instead of declaring the el element?
 const app = new Vue({
     el: "#app",
     router,
