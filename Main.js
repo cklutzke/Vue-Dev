@@ -21,8 +21,20 @@ function inchesToMm(inches) {
     }
 }
 
+const PartTemplate = {
+    template: `<div>Selected part ID is {{ $route.params.partId }}</div>`
+}
+
+const router = new VueRouter({
+    routes: [
+        { path: "/part/:partId", component: PartTemplate }
+    ]
+})
+
+// QUESTION: Does Vue Router require me to invoke .$mount("#app") here instead of declaring the el element?
 const app = new Vue({
     el: "#app",
+    router,
     data: {
         username: "carl@phos.net", // TEMP: This is here for convenience, remove it later.
         password: "statictgc", // TEMP: This is here for convenience, remove it later.
@@ -54,7 +66,18 @@ const app = new Vue({
                 _include_related_objects: ["items"],
                 api_key_id: StaticTGC_api_key_id
             }
-        })
+        }),
+        // TEMP: Hardcoded list of meeple IDs until I can get a search feature in place.
+        meeples: [
+            {id: "DE9CE08C-9A04-11E0-AACC-432941C43697", name: "Meeple, Black"},
+            {id: "DEA70F80-9A04-11E0-AACC-432941C43697", name: "Meeple, Blue"},
+            {id: "DEAD113C-9A04-11E0-AACC-432941C43697", name: "Meeple, Green"},
+            {id: "DEC8FFC8-9A04-11E0-AACC-432941C43697", name: "Meeple, Orange"},
+            {id: "DED6AFBA-9A04-11E0-AACC-432941C43697", name: "Meeple, Purple"},
+            {id: "DF0FDE0C-9A04-11E0-AACC-432941C43697", name: "Meeple, Red"},
+            {id: "DF164EEA-9A04-11E0-AACC-432941C43697", name: "Meeple, White"},
+            {id: "DF1C194C-9A04-11E0-AACC-432941C43697", name: "Meeple, Yellow"}
+        ]
     },
     computed: {
         userName: function() {

@@ -26,6 +26,17 @@
     <b-container>
       <b-row>
         <b-col>
+            <h1>Meeple Selector</h1>
+            <ul id="meepleIds">
+                <li v-for="meeple in meeples">
+                    <router-link :to="'/part/' + meeple.id">{{ meeple.name }}</router-link>
+                </li>
+            </ul>
+        </b-col>
+        <b-col>
+            <!-- TODO: Update this entire column based on router selection. -->
+            <router-view></router-view>
+
             <h1>{{ product.properties.name }}</h1>
             <b-container>
                 <b-img :src="'http:' + product.properties.preview_uri" :alt="'Photo of ' + product.properties.name" fluid />
@@ -39,9 +50,7 @@
                    allowfullscreen
             ></b-embed>
             -->
-        </b-col>
-        <b-col>
-          <b-button-group>
+            <b-button-group>
             <!-- IDEA: Any product like this that can be purchased in bulk
             should probably have controls to select the quantity to
             be ordered, which could in turn affect the subtotal price. -->
@@ -149,6 +158,7 @@
   <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.5/lodash.min.js"></script>
   <script src="https://unpkg.com/axios@0.18.0/dist/axios.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/qs@6.5.2/dist/qs.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
   <script src="wing/wing.vue.js"></script>
   <script src="Main.js"></script>
 
