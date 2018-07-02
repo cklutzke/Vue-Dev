@@ -37,7 +37,8 @@
             <!-- TODO: Update this entire column based on router selection. -->
             <router-view></router-view>
 
-            <h1>{{ product.properties.name }}</h1>
+            <hr>
+
             <b-container>
                 <b-img :src="'http:' + product.properties.preview_uri" :alt="'Photo of ' + product.properties.name" fluid />
             </b-container>
@@ -59,6 +60,7 @@
               Buy for {{ "$" + Number(product.properties.price).toFixed(2) }}
             </b-button>
             <!-- QUESTION: How do I insert the Font Awesome gift icon (fa-gift) before this dropwdown button's text property? -->
+            <!--    See https://fontawesome.com/v4.7.0/examples/#bootstrap -->
             <!-- IDEA: Make this dropdown do something useful. -->
             <b-dropdown text="Add to Wish List" :disabled = "true">
               <b-dropdown-item>

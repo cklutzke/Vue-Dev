@@ -1,7 +1,6 @@
 
 wing.base_uri = "https://www.thegamecrafter.com";
 const StaticTGC_api_key_id = "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D";
-const partID = "DF0FDE0C-9A04-11E0-AACC-432941C43697";
 
 function ouncesToGrams(ounces) {
     // Returns a string in the format "#.## g" or an empty string.
@@ -23,15 +22,19 @@ function inchesToMm(inches) {
 
 const PartTemplate = {
     template: `
-        <div>Selected part ID is {{ $route.params.partId }}</div>
+        <div>
+            Selected part ID is {{ $route.params.partId }}
+            <h1>{{ product.properties.name }}</h1>
+        </div>
     `,
     beforeRouteUpdate (to, from, next) {
         console.log("Path is changing to " + to.params.partId);
+        app.$data.product.fetch_api = "/api/part/" + to.params.partId;
+        app.$data.product.fetch();
         next();
     }
 }
 
-// TODO: How do I get product to fetch() based on the new partId?
 const router = new VueRouter({
     routes: [
         { path: "/part/:partId", component: PartTemplate }
@@ -45,8 +48,12 @@ const app = new Vue({
         username: "carl@phos.net", // TEMP: This is here for convenience, remove it later.
         password: "statictgc", // TEMP: This is here for convenience, remove it later.
         product: wing.object({
-            fetch_api: "/api/part/" + partID,
-            with_credentials: false
+            // TEMP: We need a better default here.
+            fetch_api: "/api/part/DF0FDE0C-9A04-11E0-AACC-432941C43697",
+            with_credentials: false,
+            on_fetch: function(properties) {
+                console.log("Fetched product " + properties.id + ", " + properties.name);
+            }
         }),
         session: wing.object({
             with_credentials: false,

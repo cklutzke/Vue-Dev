@@ -3,6 +3,10 @@
 /* TODO: Base this stylesheet on The Game Crafter's house style guide. */
 
 body {
-  color: white;
-  background-color: #333333;
+    color: white;
+    background-color: #333333;
+}
+
+hr {
+    border-color: inherit;
 }
