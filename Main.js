@@ -1,4 +1,6 @@
 
+"use strict";
+
 wing.base_uri = "https://www.thegamecrafter.com";
 const StaticTGC_api_key_id = "034F04B4-7329-11E8-BA7A-8BFD93A6FE1D";
 
@@ -101,7 +103,7 @@ const app = new Vue({
             }
         },
         priceTableItems: function () {
-            productProperties = this.product.properties;
+            let productProperties = this.product.properties;
             return [
                 {range: "1-9", ea: "$" + productProperties.price + " ea"},
                 {range: "10-99", ea: "$" + productProperties.price_10 + " ea"},
@@ -112,7 +114,7 @@ const app = new Vue({
         // IDEA: Add Color, Category, and Material. With links to other matching parts.
         // IDEA: Provide dropdowns to select different colors, materials, and sizes.
         vitalsTableItems: function () {
-            productProperties = this.product.properties;
+            let productProperties = this.product.properties;
             return [
                 {key: "Quantity in Stock", value1: productProperties.quantity, value2: ""},
                 {key: "Weight", value1: Number(productProperties.weight).toFixed(2) + " oz",
